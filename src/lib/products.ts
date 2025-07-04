@@ -2,12 +2,14 @@ export const products = [
   {
     "year": "1976",
     "title": "Apple I",
-    "description": "The first computer made by Apple, hand-built by Steve Wozniak."
+    "description": "The first computer made by Apple, hand-built by Steve Wozniak.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/CopsonApple1_2k_cropped.jpg"
   },
   {
     "year": "1977",
     "title": "Apple II",
-    "description": "Apple's first mass-market personal computer, known for its color graphics and open architecture."
+    "description": "Apple's first mass-market personal computer, known for its color graphics and open architecture.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Apple_II-IMG_7064.jpg/1200px-Apple_II-IMG_7064.jpg"
   },
   {
     "year": "1978",
@@ -47,7 +49,8 @@ export const products = [
   {
     "year": "1980",
     "title": "Apple III",
-    "description": "A business-oriented personal computer, intended as the successor to the Apple II."
+    "description": "A business-oriented personal computer, intended as the successor to the Apple II.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple3.jpg"
   },
   {
     "year": "1980",
@@ -122,7 +125,8 @@ export const products = [
   {
     "year": "1984",
     "title": "Macintosh 128K",
-    "description": "The original Macintosh, the first successful mass-market personal computer with a GUI."
+    "description": "The original Macintosh, the first successful mass-market personal computer with a GUI.",
+    "image": "https://placehold.co/200x120?text=Macintosh+128K"
   },
   {
     "year": "1984",
@@ -1122,7 +1126,8 @@ export const products = [
   {
     "year": "1997",
     "title": "Twentieth Anniversary Macintosh",
-    "description": "A limited-edition, luxury Macintosh desktop."
+    "description": "A limited-edition, luxury Macintosh desktop.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Apple_Museum_%28Prague%29_20th_Anniversary_Mac_%281997%29.jpg"
   },
   {
     "year": "1997",
@@ -1202,7 +1207,8 @@ export const products = [
   {
     "year": "1998",
     "title": "iMac G3",
-    "description": "A colorful, all-in-one computer that revitalized Apple's fortunes."
+    "description": "A colorful, all-in-one computer that revitalized Apple's fortunes.",
+    "image": "https://placehold.co/200x120?text=iMac+G3"
   },
   {
     "year": "1999",
@@ -1592,7 +1598,8 @@ export const products = [
   {
     "year": "2007",
     "title": "iPhone (1st generation) (8 GB)",
-    "description": "A higher-capacity version of the original iPhone."
+    "description": "A higher-capacity version of the original iPhone.",
+    "image": "https://placehold.co/200x120?text=Original+iPhone"
   },
   {
     "year": "2007",
@@ -1892,7 +1899,8 @@ export const products = [
   {
     "year": "2010",
     "title": "iPad (Wi-Fi)",
-    "description": "Apple's first tablet computer, creating a new product category."
+    "description": "Apple's first tablet computer, creating a new product category.",
+    "image": "https://placehold.co/200x120?text=iPad+1"
   },
   {
     "year": "2010",
@@ -2357,7 +2365,8 @@ export const products = [
   {
     "year": "2015",
     "title": "Apple Watch (1st generation)",
-    "description": "Apple's first smartwatch, integrating fitness tracking and notifications."
+    "description": "Apple's first smartwatch, integrating fitness tracking and notifications.",
+    "image": "https://placehold.co/200x120?text=Apple+Watch"
   },
   {
     "year": "2015",
