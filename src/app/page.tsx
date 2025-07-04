@@ -30,6 +30,7 @@ export default function Home() {
                             alt={product.title}
                             width={96}
                             height={64}
+                            unoptimized
                             className="object-contain"
                           />
                         )}
