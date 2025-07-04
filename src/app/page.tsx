@@ -3,10 +3,15 @@
 import { products } from "@/lib/products";
 import Image from "next/image";
 import { Fragment, useState } from "react";
+
+interface Product {
+  year: string;
+  title: string;
+  description: string;
+  image?: string;
+}
 export default function Home() {
-  const [openImage, setOpenImage] = useState<{src: string; alt: string} | null>(
-    null
-  );
+  const [openProduct, setOpenProduct] = useState<Product | null>(null);
   return (
     <main className="min-h-screen bg-background font-body text-foreground">
       <div className="container mx-auto max-w-4xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -24,10 +29,7 @@ export default function Home() {
                   </div>
                 )}
                 <div
-                  onClick={() =>
-                    product.image &&
-                    setOpenImage({ src: product.image!, alt: product.title })
-                  }
+                  onClick={() => product.image && setOpenProduct(product)}
                   className="group transition-colors duration-200 ease-in-out hover:bg-accent border-b border-border cursor-pointer"
                 >
                   <div className="p-6">
@@ -58,22 +60,34 @@ export default function Home() {
           })}
         </div>
       </div>
-      {openImage && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-          onClick={() => setOpenImage(null)}
-        >
-          <div className="relative w-full h-full">
-            <Image
-              src={openImage.src}
-              alt={openImage.alt}
-              fill
-              unoptimized
-              className="object-contain animate-in zoom-in-95 fade-in"
-            />
+        {openProduct && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setOpenProduct(null)}
+          >
+            <div
+              className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
+                {openProduct.image && (
+                  <Image
+                    src={openProduct.image}
+                    alt={openProduct.title}
+                    fill
+                    unoptimized
+                    className="object-contain animate-in zoom-in-95 fade-in"
+                  />
+                )}
+              </div>
+              <div className="text-white md:w-1/2 space-y-2 overflow-y-auto">
+                <h3 className="text-lg font-semibold">{openProduct.year}</h3>
+                <h2 className="text-2xl font-bold">{openProduct.title}</h2>
+                <p className="text-sm">{openProduct.description}</p>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </main>
   );
 }
