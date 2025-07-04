@@ -3,13 +3,13 @@ export const products = [
     "year": "1976",
     "title": "Apple I",
     "description": "The first computer made by Apple, hand-built by Steve Wozniak.",
-    "image": "https://placehold.co/200x120?text=Apple+I"
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e4/CopsonApple1_2k_cropped.jpg"
   },
   {
     "year": "1977",
     "title": "Apple II",
     "description": "Apple's first mass-market personal computer, known for its color graphics and open architecture.",
-    "image": "https://placehold.co/200x120?text=Apple+II"
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Apple_II-IMG_7064.jpg/1200px-Apple_II-IMG_7064.jpg"
   },
   {
     "year": "1978",
@@ -49,7 +49,8 @@ export const products = [
   {
     "year": "1980",
     "title": "Apple III",
-    "description": "A business-oriented personal computer, intended as the successor to the Apple II."
+    "description": "A business-oriented personal computer, intended as the successor to the Apple II.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple3.jpg"
   },
   {
     "year": "1980",
@@ -1125,7 +1126,8 @@ export const products = [
   {
     "year": "1997",
     "title": "Twentieth Anniversary Macintosh",
-    "description": "A limited-edition, luxury Macintosh desktop."
+    "description": "A limited-edition, luxury Macintosh desktop.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Apple_Museum_%28Prague%29_20th_Anniversary_Mac_%281997%29.jpg"
   },
   {
     "year": "1997",

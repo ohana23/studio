@@ -1,3 +1,5 @@
+'use client'
+
 import { products } from "@/lib/products";
 import Image from "next/image";
 import { Fragment, useState } from "react";
