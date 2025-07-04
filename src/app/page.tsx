@@ -67,7 +67,6 @@ export default function Home() {
           >
             <div
               className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
-              onClick={(e) => e.stopPropagation()}
             >
               <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
                 {openProduct.image && (
