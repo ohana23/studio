@@ -25,9 +25,13 @@ export default function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-2 items-center">
                       <div className="md:col-span-2 hidden md:block">
                         {product.image && (
-                          <div className="relative h-16 w-24">
-                            <Image src={product.image} alt={product.title} fill className="object-contain" />
-                          </div>
+                          <Image
+                            src={product.image}
+                            alt={product.title}
+                            width={96}
+                            height={64}
+                            className="object-contain"
+                          />
                         )}
                       </div>
                       <div className="md:col-span-4">
