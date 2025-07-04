@@ -13,7 +13,7 @@ export default function Home() {
             return (
               <Fragment key={index}>
                 {showYearHeader && (
-                  <div className="border-b border-border bg-background p-4">
+                  <div className="border-b border-border bg-background p-4 bg-[#F5F5F5]">
                     <h2 className="text-xl font-semibold text-foreground">{product.year}</h2>
                   </div>
                 )}
@@ -22,9 +22,6 @@ export default function Home() {
                 >
                   <div className="p-6">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 gap-y-2 items-center">
-                      <div className="md:col-span-2">
-                        <p className="text-sm text-muted-foreground">{product.year}</p>
-                      </div>
                       <div className="md:col-span-4">
                         <h2 className="font-semibold text-foreground">{product.title}</h2>
                       </div>
