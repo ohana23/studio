@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background font-body text-foreground">
       <div className="container mx-auto max-w-4xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-        <h1 className="text-8xl font-bold text-center mb-16 font-headline tracking-tight">
+        <h1 className="text-4xl md:text-8xl font-bold text-center mb-16 font-headline tracking-tight">
           Made by Apple
         </h1>
         <div className="border-t border-border">
