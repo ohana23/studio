@@ -1,3 +1,9 @@
+// TODO: - Change blacks to #1D1D1F
+// TODO: - Add images to all milestone products
+// TODO: - Add longer descriptions to all milestone products
+// TODO: - Add text blurbs to break up the list into big generational shifts within Apple
+// TODO: - Update the domain name
+
 'use client'
 
 import { products } from "@/lib/products";
@@ -15,8 +21,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background font-body text-foreground">
       <div className="container mx-auto max-w-4xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-center mb-16 font-headline tracking-tight">
-          Products by Apple
+        <h1 className="text-8xl font-bold text-center mb-16 font-headline tracking-tight">
+          Made by Apple
         </h1>
         <div className="border-t border-border">
           {products.map((product, index) => {
@@ -62,7 +68,7 @@ export default function Home() {
       </div>
         {openProduct && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
             onClick={() => setOpenProduct(null)}
           >
             <div
