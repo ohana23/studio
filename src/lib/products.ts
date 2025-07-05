@@ -105,7 +105,8 @@ export const products = [
   {
     "year": "1983",
     "title": "Apple Lisa",
-    "description": "The first personal computer with a graphical user interface, targeting business users."
+    "description": "The first personal computer with a graphical user interface, targeting business users.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Apple-lisa-1.jpg"
   },
   {
     "year": "1983",
@@ -126,7 +127,7 @@ export const products = [
     "year": "1984",
     "title": "Macintosh 128K",
     "description": "The original Macintosh, the first successful mass-market personal computer with a GUI.",
-    "image": "https://placehold.co/200x120?text=Macintosh+128K"
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Macintosh_128k_transparency.png"
   },
   {
     "year": "1984",
@@ -251,7 +252,8 @@ export const products = [
   {
     "year": "1986",
     "title": "Macintosh Plus",
-    "description": "An improved Macintosh with SCSI support and expanded memory."
+    "description": "An improved Macintosh with SCSI support and expanded memory.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Apple_Macintosh_Plus_white_background_%28cropped%29.jpg"
   },
   {
     "year": "1986",
@@ -511,7 +513,8 @@ export const products = [
   {
     "year": "1991",
     "title": "PowerBook 100",
-    "description": "Apple's first successful laptop, setting the standard for notebook design."
+    "description": "Apple's first successful laptop, setting the standard for notebook design.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/58/Powerbook_100_pose.jpg"
   },
   {
     "year": "1991",
@@ -796,7 +799,8 @@ export const products = [
   {
     "year": "1994",
     "title": "Apple QuickTake 100",
-    "description": "One of the first consumer digital cameras."
+    "description": "One of the first consumer digital cameras.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/cc/Apple_QuickTake.jpg"
   },
   {
     "year": "1994",
@@ -836,12 +840,13 @@ export const products = [
   {
     "year": "1994",
     "title": "PowerBook 520c",
-    "description": "A PowerBook laptop with a color display."
+    "description": "A PowerBook laptop with the first trackpad."
   },
   {
     "year": "1994",
     "title": "PowerBook 540c",
-    "description": "A high-end PowerBook with a color display."
+    "description": "A high-end PowerBook with the first trackpad.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e8/540c_open.jpg"
   },
   {
     "year": "1994",
@@ -1207,8 +1212,8 @@ export const products = [
   {
     "year": "1998",
     "title": "iMac G3",
-    "description": "A colorful, all-in-one computer that revitalized Apple's fortunes.",
-    "image": "https://placehold.co/200x120?text=iMac+G3"
+    "description": "A colorful, all-in-one computer that revitalized Apple's fortunes and marked the return of Steve Jobs.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/db/IMac_G3_Bondi_Blue%2C_three-quarters_view.png"
   },
   {
     "year": "1999",
@@ -1228,12 +1233,14 @@ export const products = [
   {
     "year": "1999",
     "title": "iBook G3",
-    "description": "Apple's consumer laptop, known for its clamshell design and wireless networking."
+    "description": "Apple's consumer laptop, known for its clamshell design and wireless networking.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/23/IBook_flavors.jpg"
   },
   {
     "year": "1999",
     "title": "AirPort (802.11b, \"Graphite\")",
-    "description": "Apple's first wireless networking product."
+    "description": "Apple's first wireless networking product.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/2/26/Apple_graphite_airport_base_station_front.jpg"
   },
   {
     "year": "1999",
@@ -1263,7 +1270,8 @@ export const products = [
   {
     "year": "2000",
     "title": "Power Mac G4 Cube",
-    "description": "A compact, cube-shaped Power Mac with a unique design."
+    "description": "A compact, cube-shaped Power Mac with a unique design.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Power_mac_g4_cube.png"
   },
   {
     "year": "2000",
@@ -1283,7 +1291,8 @@ export const products = [
   {
     "year": "2001",
     "title": "PowerBook G4 Titanium",
-    "description": "A thin, titanium-clad PowerBook with a widescreen display."
+    "description": "A thin, titanium-clad PowerBook with a widescreen display.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e5/1ghz_Titanium_Apple_PowerBook_G4.jpg"
   },
   {
     "year": "2001",
@@ -1298,7 +1307,8 @@ export const products = [
   {
     "year": "2001",
     "title": "iBook (white)",
-    "description": "A redesigned iBook with a white polycarbonate shell."
+    "description": "A redesigned iBook with a white polycarbonate shell.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/81/IBook_G3_M6497_J.jpg"
   },
   {
     "year": "2001",
@@ -1313,12 +1323,14 @@ export const products = [
   {
     "year": "2001",
     "title": "iPod (1st gen)",
-    "description": "Apple's first portable digital music player, revolutionizing the music industry."
+    "description": "Apple's first portable digital music player, revolutionizing the music industry.",
+    "image": "https://apple.techable.com/wp-content/uploads/2018/06/Apple-iPod-Original-1st-Generation-Specs.jpg"
   },
   {
     "year": "2002",
     "title": "iMac G4 15\"",
-    "description": "A unique iMac with a hemispherical base and LCD display on an adjustable arm."
+    "description": "A unique iMac with a hemispherical base and LCD display on an adjustable arm.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Apple_iMac_G4_%2832871160027%29.jpg"
   },
   {
     "year": "2002",
@@ -1393,7 +1405,8 @@ export const products = [
   {
     "year": "2003",
     "title": "Power Mac G5",
-    "description": "The first 64-bit Macintosh, featuring the PowerPC G5 processor."
+    "description": "The first 64-bit Macintosh, featuring the PowerPC G5 processor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/f/f7/Apple_Power_Macintosh_G5_Late_2005_02.jpg"
   },
   {
     "year": "2003",
@@ -1433,7 +1446,8 @@ export const products = [
   {
     "year": "2004",
     "title": "iPod Mini (1st gen)",
-    "description": "A smaller, colorful version of the iPod."
+    "description": "A smaller, colorful version of the iPod.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Mini_iPod.svg"
   },
   {
     "year": "2004",
@@ -1483,12 +1497,14 @@ export const products = [
   {
     "year": "2005",
     "title": "Mac Mini",
-    "description": "A compact, affordable desktop Mac."
+    "description": "A compact, affordable desktop Mac.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Mac-mini-1st-gen.jpg"
   },
   {
     "year": "2005",
     "title": "iPod Shuffle (1st gen)",
-    "description": "A screenless, ultra-portable iPod."
+    "description": "A screenless, ultra-portable iPod.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c7/IPod_shuffle_1G.png"
   },
   {
     "year": "2005",
@@ -1498,7 +1514,8 @@ export const products = [
   {
     "year": "2005",
     "title": "iPod Nano (1st gen)",
-    "description": "A thin, flash-based iPod replacing the Mini."
+    "description": "A thin, flash-based iPod replacing the Mini.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d9/1G_Nano_iPod.svg"
   },
   {
     "year": "2005",
@@ -1592,14 +1609,9 @@ export const products = [
   },
   {
     "year": "2007",
-    "title": "iPhone (1st generation) (4 GB)",
-    "description": "The original iPhone, combining phone, iPod, and internet in one device."
-  },
-  {
-    "year": "2007",
-    "title": "iPhone (1st generation) (8 GB)",
-    "description": "A higher-capacity version of the original iPhone.",
-    "image": "https://placehold.co/200x120?text=Original+iPhone"
+    "title": "iPhone (1st generation)",
+    "description": "The original iPhone, combining phone, iPod, and internet in one device.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/ad/IPhone_1st_Gen.svg"
   },
   {
     "year": "2007",
@@ -1634,7 +1646,8 @@ export const products = [
   {
     "year": "2007",
     "title": "iPod Nano (3rd gen)",
-    "description": "A short, wide iPod Nano with video playback."
+    "description": "A short, wide iPod Nano with video playback.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/31/IPod_nano_3g_black.jpg"
   },
   {
     "year": "2007",
@@ -1644,7 +1657,8 @@ export const products = [
   {
     "year": "2007",
     "title": "iPod Touch (1st generation) (8 & 16 GB)",
-    "description": "A touchscreen iPod with Wi-Fi and web browsing."
+    "description": "A touchscreen iPod with Wi-Fi and web browsing.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d5/IPod_touch_1st_generation.png"
   },
   {
     "year": "2008",
@@ -1659,7 +1673,8 @@ export const products = [
   {
     "year": "2008",
     "title": "MacBook Air (Early 2008)",
-    "description": "The world's thinnest notebook at launch, emphasizing portability."
+    "description": "The world's thinnest notebook at launch, emphasizing portability.",
+    "image": "https://cdsassets.apple.com/live/I2F2FLC5/mac/macbookair.240x240.png"
   },
   {
     "year": "2008",
@@ -1900,7 +1915,7 @@ export const products = [
     "year": "2010",
     "title": "iPad (Wi-Fi)",
     "description": "Apple's first tablet computer, creating a new product category.",
-    "image": "https://placehold.co/200x120?text=iPad+1"
+    "image": "https://upload.wikimedia.org/wikipedia/commons/7/7e/IPad-WiFi-1stGen.jpg"
   },
   {
     "year": "2010",
@@ -1940,7 +1955,8 @@ export const products = [
   {
     "year": "2010",
     "title": "Magic Trackpad",
-    "description": "A multi-touch trackpad for desktop Macs."
+    "description": "A multi-touch trackpad for desktop Macs.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/af/AppleMagicTrackpad.jpg"
   },
   {
     "year": "2010",
@@ -1959,18 +1975,14 @@ export const products = [
   },
   {
     "year": "2010",
-    "title": "iPod Touch (4th generation) (8 & 64 GB)",
+    "title": "iPod Touch (4th generation)",
     "description": "A thinner iPod Touch with a Retina display and cameras."
   },
   {
     "year": "2010",
-    "title": "iPod Touch (4th generation) (32 GB)",
-    "description": "A 32 GB version of the 4th gen iPod Touch."
-  },
-  {
-    "year": "2010",
     "title": "iPod Nano (6th gen)",
-    "description": "A square, multi-touch iPod Nano."
+    "description": "A square, multi-touch iPod Nano.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/6G_IPod_Nano.svg"
   },
   {
     "year": "2010",
@@ -1999,13 +2011,9 @@ export const products = [
   },
   {
     "year": "2011",
-    "title": "iPad 2 (16 GB)",
-    "description": "A thinner, lighter iPad with cameras and a faster processor."
-  },
-  {
-    "year": "2011",
-    "title": "iPad 2 (32 & 64 GB)",
-    "description": "Higher-capacity versions of the iPad 2."
+    "title": "iPad 2",
+    "description": "A thinner, lighter iPad with cameras and a faster processor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a6/IPad2.png"
   },
   {
     "year": "2011",
@@ -2040,17 +2048,13 @@ export const products = [
   {
     "year": "2011",
     "title": "iPhone 4 (8 GB)",
-    "description": "A lower-capacity version of the iPhone 4."
+    "description": "A lower-capacity version of the iPhone 4.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/59/IPhone_4_Mock_No_Shadow_PSD.png"
   },
   {
     "year": "2011",
     "title": "iPhone 4S (16 GB)",
     "description": "A faster iPhone with Siri voice assistant."
-  },
-  {
-    "year": "2011",
-    "title": "iPhone 4S (32 & 64 GB)",
-    "description": "Higher-capacity versions of the iPhone 4S."
   },
   {
     "year": "2011",
@@ -2115,7 +2119,8 @@ export const products = [
   {
     "year": "2012",
     "title": "iPod Nano (7th gen)",
-    "description": "A thin, multi-touch iPod Nano with a larger screen."
+    "description": "A thin, multi-touch iPod Nano with a larger screen.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/ec/7th_Generation_iPod_Nano.svg"
   },
   {
     "year": "2012",
@@ -2209,23 +2214,21 @@ export const products = [
   },
   {
     "year": "2013",
-    "title": "iPhone 4S (8 GB)",
-    "description": "A lower-capacity version of the iPhone 4S."
+    "title": "iPhone 4S",
+    "description": "The final Apple product announced in the lifetime of Steve Jobs, who died the following day.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d2/IPhone_4S_No_shadow.png"
   },
   {
     "year": "2013",
-    "title": "iPhone 5C (16 & 32 GB)",
-    "description": "A colorful, plastic-bodied iPhone."
+    "title": "iPhone 5C",
+    "description": "A colorful, plastic-bodied iPhone.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/97/IPhone_5C_%28blue%29.svg"
   },
   {
     "year": "2013",
-    "title": "iPhone 5S (16 & 32 GB)",
-    "description": "The first iPhone with Touch ID fingerprint sensor."
-  },
-  {
-    "year": "2013",
-    "title": "iPhone 5S (64 GB)",
-    "description": "A higher-capacity version of the iPhone 5S."
+    "title": "iPhone 5S",
+    "description": "The first iPhone with Touch ID fingerprint sensor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d9/IPhone_5s_golden.svg"
   },
   {
     "year": "2013",
@@ -2299,23 +2302,14 @@ export const products = [
   },
   {
     "year": "2014",
-    "title": "iPhone 6 (16 & 64 GB)",
-    "description": "A major redesign of the iPhone, introducing larger screen sizes."
+    "title": "iPhone 6",
+    "description": "A major redesign of the iPhone, introducing larger screen sizes.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/0f/IPhone_6_Space_Gray.svg"
   },
   {
     "year": "2014",
-    "title": "iPhone 6 Plus (16 & 64 GB)",
+    "title": "iPhone 6 Plus",
     "description": "A larger version of the iPhone 6."
-  },
-  {
-    "year": "2014",
-    "title": "iPhone 6 (128 GB)",
-    "description": "A higher-capacity version of the iPhone 6."
-  },
-  {
-    "year": "2014",
-    "title": "iPhone 6 Plus (128 GB)",
-    "description": "A higher-capacity version of the iPhone 6 Plus."
   },
   {
     "year": "2014",
@@ -2329,17 +2323,12 @@ export const products = [
   },
   {
     "year": "2014",
-    "title": "iPad Air 2 (16 & 64 GB)",
+    "title": "iPad Air 2",
     "description": "A thinner, lighter iPad Air with Touch ID."
   },
   {
     "year": "2014",
-    "title": "iPad Air 2 (128 GB)",
-    "description": "A higher-capacity version of the iPad Air 2."
-  },
-  {
-    "year": "2014",
-    "title": "iPad Mini 3 (16, 64 & 128 GB)",
+    "title": "iPad Mini 3",
     "description": "A refreshed iPad Mini with Touch ID."
   },
   {
@@ -2366,7 +2355,7 @@ export const products = [
     "year": "2015",
     "title": "Apple Watch (1st generation)",
     "description": "Apple's first smartwatch, integrating fitness tracking and notifications.",
-    "image": "https://placehold.co/200x120?text=Apple+Watch"
+    "image": "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111985_alu-spacegray-sp.jpg"
   },
   {
     "year": "2015",
@@ -2390,48 +2379,23 @@ export const products = [
   },
   {
     "year": "2015",
-    "title": "iPod Touch (6th generation) (32 GB and 128 GB)",
+    "title": "iPod Touch (6th generation)",
     "description": "A faster iPod Touch with improved cameras."
   },
   {
     "year": "2015",
-    "title": "iPod Touch (6th generation) (16 GB and 64 GB)",
-    "description": "Lower-capacity versions of the 6th gen iPod Touch."
-  },
-  {
-    "year": "2015",
-    "title": "iPad Mini 4 (16 GB and 64 GB)",
+    "title": "iPad Mini 4",
     "description": "A thinner, lighter iPad Mini with improved specs."
   },
   {
     "year": "2015",
-    "title": "iPad Mini 4 (32 GB)",
-    "description": "A 32 GB version of the iPad Mini 4."
-  },
-  {
-    "year": "2015",
-    "title": "iPad Mini 4 (128 GB)",
-    "description": "A higher-capacity version of the iPad Mini 4."
-  },
-  {
-    "year": "2015",
-    "title": "iPhone 6S (16GB and 64GB)",
+    "title": "iPhone 6S",
     "description": "A faster iPhone with 3D Touch and improved cameras."
   },
   {
     "year": "2015",
-    "title": "iPhone 6S (128 GB)",
-    "description": "A higher-capacity version of the iPhone 6S."
-  },
-  {
-    "year": "2015",
-    "title": "iPhone 6S Plus (16GB and 64GB)",
+    "title": "iPhone 6S Plus",
     "description": "A larger version of the iPhone 6S."
-  },
-  {
-    "year": "2015",
-    "title": "iPhone 6S Plus (128 GB)",
-    "description": "A higher-capacity version of the iPhone 6S Plus."
   },
   {
     "year": "2015",
@@ -2451,7 +2415,8 @@ export const products = [
   {
     "year": "2015",
     "title": "Magic Mouse 2 (Lightning)",
-    "description": "A rechargeable version of Apple's multi-touch mouse."
+    "description": "A rechargeable version of Apple's multi-touch mouse.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Magic_Mouse.jpg"
   },
   {
     "year": "2015",
@@ -2461,22 +2426,19 @@ export const products = [
   {
     "year": "2015",
     "title": "Magic Keyboard (first generation)",
-    "description": "A rechargeable, low-profile keyboard."
+    "description": "A rechargeable, low-profile keyboard.",
+    "image": "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/112443_SP734_magic_keyboard.png"
   },
   {
     "year": "2015",
-    "title": "Apple TV HD (32 GB)",
+    "title": "Apple TV HD",
     "description": "A 4th generation Apple TV with an App Store and Siri Remote."
   },
   {
     "year": "2015",
-    "title": "Apple TV HD (64 GB)",
-    "description": "A higher-capacity version of the 4th generation Apple TV."
-  },
-  {
-    "year": "2015",
     "title": "Siri Remote (1st generation)",
-    "description": "A remote with a touchpad and Siri voice control for Apple TV."
+    "description": "A remote with a touchpad and Siri voice control for Apple TV.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/6/64/Apple_tv_gen_4_remote.jpeg"
   },
   {
     "year": "2015",
@@ -2515,13 +2477,9 @@ export const products = [
   },
   {
     "year": "2016",
-    "title": "iPhone 7 (32 & 128 GB)",
-    "description": "A water-resistant iPhone with improved cameras and no headphone jack."
-  },
-  {
-    "year": "2016",
-    "title": "iPhone 7 (256 GB)",
-    "description": "A higher-capacity version of the iPhone 7."
+    "title": "iPhone 7",
+    "description": "A water-resistant iPhone with improved cameras and no headphone jack.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/18/IPhone_7_Jet_Black.svg"
   },
   {
     "year": "2016",
@@ -2537,16 +2495,6 @@ export const products = [
     "year": "2016",
     "title": "EarPods with Lightning Connector",
     "description": "Apple's standard wired earbuds with a Lightning connector."
-  },
-  {
-    "year": "2016",
-    "title": "iPhone 6S (32 GB)",
-    "description": "A higher-capacity version of the iPhone 6S."
-  },
-  {
-    "year": "2016",
-    "title": "iPhone 6S Plus (32 GB)",
-    "description": "A higher-capacity version of the iPhone 6S Plus."
   },
   {
     "year": "2016",
@@ -2591,7 +2539,8 @@ export const products = [
   {
     "year": "2016",
     "title": "AirPods (1st generation)",
-    "description": "Apple's first wireless earbuds, popularizing the true wireless form factor."
+    "description": "Apple's first wireless earbuds, popularizing the true wireless form factor.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/01/AirPods.jpg"
   },
   {
     "year": "2017",
@@ -2690,28 +2639,19 @@ export const products = [
   },
   {
     "year": "2017",
-    "title": "iPhone 8 (64 GB)",
+    "title": "iPhone 8",
     "description": "A glass-backed iPhone with wireless charging."
   },
   {
     "year": "2017",
-    "title": "iPhone 8 (256 GB)",
-    "description": "A higher-capacity version of the iPhone 8."
-  },
-  {
-    "year": "2017",
-    "title": "iPhone 8 Plus (64 GB)",
+    "title": "iPhone 8 Plus",
     "description": "A larger version of the iPhone 8."
   },
   {
     "year": "2017",
-    "title": "iPhone 8 Plus (256 GB)",
-    "description": "A higher-capacity version of the iPhone 8 Plus."
-  },
-  {
-    "year": "2017",
     "title": "iPhone X",
-    "description": "The first iPhone with an OLED display and Face ID."
+    "description": "The first iPhone with an OLED display and Face ID.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/3/32/IPhone_X_vector.svg"
   },
   {
     "year": "2017",
@@ -2721,7 +2661,8 @@ export const products = [
   {
     "year": "2018",
     "title": "HomePod (first generation)",
-    "description": "Apple's smart speaker with high-fidelity audio and Siri integration."
+    "description": "Apple's smart speaker with high-fidelity audio and Siri integration.",
+    "image": "https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111994_homepod_space_gray_large_2x.jpg"
   },
   {
     "year": "2018",
@@ -2756,7 +2697,8 @@ export const products = [
   {
     "year": "2018",
     "title": "iPhone XS",
-    "description": "A premium iPhone with an OLED display and improved cameras."
+    "description": "A premium iPhone with an OLED display and improved cameras.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/0/06/IPhone_XS_Gold.svg"
   },
   {
     "year": "2018",
@@ -2765,13 +2707,9 @@ export const products = [
   },
   {
     "year": "2018",
-    "title": "iPhone XR (64 GB and 128 GB)",
-    "description": "A colorful, more affordable iPhone with Face ID."
-  },
-  {
-    "year": "2018",
-    "title": "iPhone XR (256 GB)",
-    "description": "A higher-capacity version of the iPhone XR."
+    "title": "iPhone XR",
+    "description": "A colorful, more affordable iPhone with Face ID.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/e/e9/IPhone_XR_Blue.svg"
   },
   {
     "year": "2018",
@@ -2877,16 +2815,6 @@ export const products = [
     "year": "2019",
     "title": "Apple Watch Edition Series 5",
     "description": "A premium Apple Watch Series 5 with ceramic or titanium case."
-  },
-  {
-    "year": "2019",
-    "title": "iPhone 8 (128 GB)",
-    "description": "A higher-capacity version of the iPhone 8."
-  },
-  {
-    "year": "2019",
-    "title": "iPhone 8 Plus (128 GB)",
-    "description": "A higher-capacity version of the iPhone 8 Plus."
   },
   {
     "year": "2019",
@@ -3361,7 +3289,8 @@ export const products = [
   {
     "year": "2024",
     "title": "Apple Vision Pro",
-    "description": "Apple's first spatial computer, blending digital content with the physical world."
+    "description": "Apple's first spatial computer, blending digital content with the physical world.",
+    "image": "https://www.apple.com/newsroom/images/media/introducing-apple-vision-pro/Apple-WWDC23-Vision-Pro-glass-230605_big.jpg.large_2x.jpg"
   },
   {
     "year": "2024",
@@ -3396,7 +3325,8 @@ export const products = [
   {
     "year": "2024",
     "title": "iPad Pro 11-in. (M4)",
-    "description": "A redesigned 11-inch iPad Pro with M4 chip."
+    "description": "A redesigned 11-inch iPad Pro with M4 chip.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d8/IPad_Pro_11_mockup.png"
   },
   {
     "year": "2024",

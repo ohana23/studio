@@ -3,6 +3,8 @@
 // TODO: - Add longer descriptions to all milestone products
 // TODO: - Add text blurbs to break up the list into big generational shifts within Apple
 // TODO: - Update the domain name
+// TODO: - Remove the backgrounds of the product images so that the interface looks cleaner
+// TODO: - Remove items that repeat because of storage sizes
 
 'use client'
 
