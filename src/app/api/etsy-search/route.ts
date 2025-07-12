@@ -7,6 +7,14 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Missing query' }, { status: 400 });
   }
 
+  const useMock = process.env.USE_MOCK_ETSY === 'true';
+
+  if (useMock) {
+    const base = `https://www.etsy.com/search?q=${encodeURIComponent(query)}`;
+    const links = Array.from({ length: 5 }, (_, i) => `${base}&mock=${i + 1}`);
+    return NextResponse.json({ links });
+  }
+
   const apiKey = process.env.ETSY_API_KEY;
   if (!apiKey) {
     return NextResponse.json({ error: 'ETSY_API_KEY not configured' }, { status: 500 });
