@@ -11,6 +11,7 @@
 import { products } from "@/lib/products";
 import Image from "next/image";
 import { Fragment, useState } from "react";
+import EtsyLinks from "@/components/etsy/EtsyLinks";
 
 interface Product {
   year: string;
@@ -59,6 +60,7 @@ export default function Home() {
                       </div>
                       <div className="md:col-span-6">
                         <p className="text-sm text-muted-foreground">{product.description}</p>
+                        <EtsyLinks query={`${product.title} ${product.description}`} />
                       </div>
                     </div>
                   </div>
@@ -91,6 +93,7 @@ export default function Home() {
                 <h3 className="text-lg font-semibold">{openProduct.year}</h3>
                 <h2 className="text-2xl font-bold">{openProduct.title}</h2>
                 <p className="text-sm">{openProduct.description}</p>
+                <EtsyLinks query={`${openProduct.title} ${openProduct.description}`} />
               </div>
             </div>
           </div>
