@@ -87,7 +87,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
             {!loading && ebayLinks.length > 0 && !error && (
               <>
                 <h4 className="text-sm font-medium text-muted-foreground">Purchase on eBay</h4>
-                <ul className="space-y-1">
+                <ul className="space-y-2">
                   {ebayLinks.map((listing, idx) => (
                     <li
                       key={idx}
@@ -98,7 +98,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                         href={listing.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
+                        className="inline-flex items-center gap-4 text-white no-underline transition-opacity hover:opacity-50 focus-visible:opacity-50"
                         onMouseEnter={showPreview(listing.image)}
                         onMouseLeave={hidePreview}
                         onFocus={showPreview(listing.image)}
