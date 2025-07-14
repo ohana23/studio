@@ -7,13 +7,13 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Missing query" }, { status: 400 });
   }
 
-  const appId = process.env.EBAY_APP_ID;
+  const appId = process.env.EBAY_SANDBOX_APP_ID;
   if (!appId) {
     return NextResponse.json({ error: "Missing eBay credentials" }, { status: 500 });
   }
 
   const url =
-    "https://svcs.ebay.com/services/search/FindingService/v1" +
+    "https://svcs.sandbox.ebay.com/services/search/FindingService/v1" +
     `?OPERATION-NAME=findItemsByKeywords` +
     `&SERVICE-VERSION=1.13.0` +
     `&SECURITY-APPNAME=${appId}` +
