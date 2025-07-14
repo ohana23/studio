@@ -20,5 +20,11 @@ sandbox or production environment.
    - When using the sandbox, provide `EBAY_SANDBOX_OAUTH_TOKEN`.
    - When using production, provide `EBAY_OAUTH_TOKEN`.
 
+When you run a production build with `next build && next start`, environment
+variables from `.env.local` are **not** loaded automatically. Either export the
+variables in your shell or create a `.env.production` file containing the same
+values so that the API route can read them at runtime. If `EBAY_ENV` is
+omitted, the sandbox endpoint is used by default.
+
 Alternatively, export the variables in your shell before starting the
 development server.

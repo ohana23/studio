@@ -5,6 +5,12 @@ const ENDPOINTS = {
   production: "https://api.ebay.com/buy/browse/v1/item_summary/search",
 } as const;
 
+export interface Listing {
+  url: string;
+  title: string;
+  image: string | null;
+}
+
 function getConfig(env?: string) {
   const mode = env === "production" ? "production" : "sandbox";
   const token =
@@ -46,8 +52,9 @@ export async function GET(request: NextRequest) {
     }
     const data = await res.json();
     const items = data.itemSummaries || [];
-    const listings = items
-      .map((item: any) => ({
+
+    const listings: Listing[] = items
+      .map((item: any): Listing => ({
         url: item.itemWebUrl,
         title: item.title,
         image:
@@ -55,7 +62,7 @@ export async function GET(request: NextRequest) {
           item.thumbnailImages?.[0]?.imageUrl ||
           null,
       }))
-      .filter((i) => i.url && i.title);
+      .filter((i): i is Listing => Boolean(i.url && i.title));
     return NextResponse.json({ listings });
   } catch (err) {
     return NextResponse.json({ error: "Failed" }, { status: 500 });
