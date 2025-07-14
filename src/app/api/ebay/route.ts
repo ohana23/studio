@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
   }
 
   const envOverride = searchParams.get("env") || undefined;
-  const { token, endpoint } = getConfig(envOverride || process.env.EBAY_ENV);
+  const { token, endpoint, mode } = getConfig(envOverride || process.env.EBAY_ENV);
 
   if (!token) {
     return NextResponse.json(
@@ -31,8 +31,13 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const url =
-    `${endpoint}?q=${encodeURIComponent(query)}&limit=3`;
+  const url = `${endpoint}?q=${encodeURIComponent(query)}&limit=3`;
+  const requestInfo = {
+    endpoint,
+    env: mode,
+    params: { q: query, limit: 3 },
+    url,
+  };
 
   try {
     const res = await fetch(url, {
@@ -42,8 +47,27 @@ export async function GET(request: NextRequest) {
       },
     });
     if (!res.ok) {
-      return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
+      const text = await res.text();
+      let payload: unknown = text;
+      try {
+        payload = JSON.parse(text);
+      } catch {
+        // ignore parsing errors and keep raw text
+      }
+      return NextResponse.json(
+        {
+          error: "eBay API request failed",
+          details: {
+            ...requestInfo,
+            status: res.status,
+            statusText: res.statusText,
+            response: payload,
+          },
+        },
+        { status: 500 }
+      );
     }
+
     const data = await res.json();
     const items = data.itemSummaries || [];
     const listings = items
@@ -57,7 +81,13 @@ export async function GET(request: NextRequest) {
       }))
       .filter((i) => i.url && i.title);
     return NextResponse.json({ listings });
-  } catch (err) {
-    return NextResponse.json({ error: "Failed" }, { status: 500 });
+  } catch (err: any) {
+    return NextResponse.json(
+      {
+        error: "Failed to fetch eBay data",
+        details: { ...requestInfo, message: err?.message ?? String(err) },
+      },
+      { status: 500 }
+    );
   }
 }
