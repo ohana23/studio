@@ -24,13 +24,6 @@ export async function GET(request: NextRequest) {
   const envOverride = searchParams.get("env") || undefined;
   const { token, endpoint, mode } = getConfig(envOverride || process.env.EBAY_ENV);
 
-  if (!token) {
-    return NextResponse.json(
-      { error: "Missing eBay credentials" },
-      { status: 500 }
-    );
-  }
-
   const url = `${endpoint}?q=${encodeURIComponent(query)}&limit=3`;
   const requestInfo = {
     endpoint,
@@ -38,6 +31,14 @@ export async function GET(request: NextRequest) {
     params: { q: query, limit: 3 },
     url,
   };
+
+  if (!token) {
+    console.error("Missing eBay credentials", requestInfo);
+    return NextResponse.json(
+      { error: "Missing eBay credentials" },
+      { status: 500 }
+    );
+  }
 
   try {
     const res = await fetch(url, {
@@ -54,15 +55,17 @@ export async function GET(request: NextRequest) {
       } catch {
         // ignore parsing errors and keep raw text
       }
+      const errorInfo = {
+        ...requestInfo,
+        status: res.status,
+        statusText: res.statusText,
+        response: payload,
+      };
+      console.error("eBay API request failed", errorInfo);
       return NextResponse.json(
         {
           error: "eBay API request failed",
-          details: {
-            ...requestInfo,
-            status: res.status,
-            statusText: res.statusText,
-            response: payload,
-          },
+          details: errorInfo,
         },
         { status: 500 }
       );
@@ -82,10 +85,12 @@ export async function GET(request: NextRequest) {
       .filter((i) => i.url && i.title);
     return NextResponse.json({ listings });
   } catch (err: any) {
+    const errorInfo = { ...requestInfo, message: err?.message ?? String(err) };
+    console.error("Failed to fetch eBay data", errorInfo);
     return NextResponse.json(
       {
         error: "Failed to fetch eBay data",
-        details: { ...requestInfo, message: err?.message ?? String(err) },
+        details: errorInfo,
       },
       { status: 500 }
     );
