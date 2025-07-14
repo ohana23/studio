@@ -19,7 +19,7 @@ interface ProductModalProps {
 }
 
 export function ProductModal({ product, onClose }: ProductModalProps) {
-  const { listings: ebayLinks, loading } = useEbayListings(product.title);
+  const { listings: ebayLinks, loading, error } = useEbayListings(product.title);
   const [preview, setPreview] = useState<{
     src: string;
     x: number;
@@ -84,12 +84,16 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                 Searching eBay...
               </div>
             )}
-            {!loading && ebayLinks.length > 0 && (
+            {!loading && ebayLinks.length > 0 && !error && (
               <>
                 <h4 className="text-sm font-medium text-muted-foreground">Purchase on eBay</h4>
                 <ul className="space-y-1">
                   {ebayLinks.map((listing, idx) => (
-                    <li key={idx} className="animate-in duration-700 fade-in slide-in-from-bottom-1" style={{ animationDelay: `${idx * 50}ms` }}>
+                    <li
+                      key={idx}
+                      className="animate-in duration-700 fade-in slide-in-from-bottom-1"
+                      style={{ animationDelay: `${idx * 50}ms` }}
+                    >
                       <a
                         href={listing.url}
                         target="_blank"
@@ -107,6 +111,9 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                   ))}
                 </ul>
               </>
+            )}
+            {!loading && (ebayLinks.length === 0 || error) && (
+              <h4 className="text-sm font-medium text-muted-foreground">No matching items on eBay right now.</h4>
             )}
           </div>
         </div>
