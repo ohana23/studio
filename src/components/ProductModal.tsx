@@ -1,6 +1,8 @@
 import Image from "next/image";
 import clsx from "clsx";
 import { ExternalLink } from "lucide-react";
+import { createPortal } from "react-dom";
+import { useState } from "react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
 
 interface Product {
@@ -17,6 +19,40 @@ interface ProductModalProps {
 
 export function ProductModal({ product, onClose }: ProductModalProps) {
   const ebayLinks = useEbayListings(product.title);
+  const [preview, setPreview] = useState<{
+    src: string;
+    x: number;
+    y: number;
+  } | null>(null);
+
+  const canHover = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover)").matches;
+
+  const showPreview = (
+    src: string | null | undefined,
+  ) =>
+    (
+      e: React.MouseEvent<HTMLAnchorElement> |
+        React.FocusEvent<HTMLAnchorElement>
+    ) => {
+      if (!src) return;
+      if (e.type !== "focus" && !canHover()) return;
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      const width = 160;
+      const height = 160;
+      let x = rect.left;
+      let y = rect.bottom + 8;
+      if (x + width > window.innerWidth) {
+        x = window.innerWidth - width - 8;
+      }
+      if (y + height > window.innerHeight) {
+        y = rect.top - height - 8;
+      }
+      setPreview({ src, x, y });
+    };
+
+  const hidePreview = () => setPreview(null);
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
@@ -47,26 +83,20 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               </h4>
               <ul className="space-y-1">
                 {ebayLinks.map((listing, idx) => (
-                  <li key={idx} className="relative group">
+                  <li key={idx}>
                     <a
                       href={listing.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
+                      className="inline-flex items-baseline gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
+                      onMouseEnter={showPreview(listing.image)}
+                      onMouseLeave={hidePreview}
+                      onFocus={showPreview(listing.image)}
+                      onBlur={hidePreview}
                     >
+                      <ExternalLink className="mr-1 inline size-4" aria-hidden="true" />
                       {listing.title}
-                      <ExternalLink className="size-4" aria-hidden="true" />
                     </a>
-                    {listing.image && (
-                      <Image
-                        src={listing.image}
-                        alt=""
-                        width={160}
-                        height={160}
-                        unoptimized
-                        className="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-md border bg-background object-cover shadow-lg group-hover:block group-focus-visible:block"
-                      />
-                    )}
                   </li>
                 ))}
               </ul>
@@ -74,6 +104,19 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           )}
         </div>
       </div>
+      {preview &&
+        createPortal(
+          <Image
+            src={preview.src}
+            alt=""
+            width={160}
+            height={160}
+            unoptimized
+            className="pointer-events-none fixed z-50 rounded-md border bg-background object-cover shadow-lg"
+            style={{ top: preview.y, left: preview.x }}
+          />,
+          document.body,
+        )}
     </div>
   );
 }
