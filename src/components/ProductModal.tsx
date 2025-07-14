@@ -1,4 +1,5 @@
 import Image from "next/image";
+import clsx from "clsx";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
 
 interface Product {
@@ -23,8 +24,8 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
       <div
         className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
       >
-        <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
-          {product.image && (
+        {product.image && (
+          <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
             <Image
               src={product.image}
               alt={product.title}
@@ -32,9 +33,9 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               unoptimized
               className="object-contain animate-in zoom-in-95 fade-in"
             />
-          )}
-        </div>
-        <div className="text-white md:w-1/2 space-y-2 overflow-y-auto">
+          </div>
+        )}
+        <div className={clsx("text-white space-y-2 overflow-y-auto", product.image ? "md:w-1/2" : "w-full")}>
           <h3 className="text-lg font-semibold">{product.year}</h3>
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-sm">{product.description}</p>
