@@ -1,6 +1,7 @@
 import Image from "next/image";
 import clsx from "clsx";
 import { ExternalLinkIcon } from "./ExternalLinkIcon";
+import { Spinner } from "./Spinner";
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
@@ -18,7 +19,7 @@ interface ProductModalProps {
 }
 
 export function ProductModal({ product, onClose }: ProductModalProps) {
-  const ebayLinks = useEbayListings(product.title);
+  const { listings: ebayLinks, loading } = useEbayListings(product.title);
   const [preview, setPreview] = useState<{
     src: string;
     x: number;
@@ -76,32 +77,38 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           <h3 className="text-lg font-semibold">{product.year}</h3>
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-sm">{product.description}</p>
-          {ebayLinks.length > 0 && (
-            <div className="pt-4 space-y-1">
-              <h4 className="text-sm font-medium text-muted-foreground">
-                Purchase on eBay
-              </h4>
-              <ul className="space-y-1">
-                {ebayLinks.map((listing, idx) => (
-                  <li key={idx}>
-                    <a
-                      href={listing.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
-                      onMouseEnter={showPreview(listing.image)}
-                      onMouseLeave={hidePreview}
-                      onFocus={showPreview(listing.image)}
-                      onBlur={hidePreview}
-                    >
-                      <ExternalLinkIcon className="h-4 w-4 shrink-0" />
-                      {listing.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <div className="pt-4 space-y-1">
+            {loading && (
+              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <Spinner className="h-4 w-4" />
+                Searching eBay...
+              </div>
+            )}
+            {!loading && ebayLinks.length > 0 && (
+              <>
+                <h4 className="text-sm font-medium text-muted-foreground">Purchase on eBay</h4>
+                <ul className="space-y-1">
+                  {ebayLinks.map((listing, idx) => (
+                    <li key={idx} className="animate-in fade-in slide-in-from-bottom-1" style={{ animationDelay: `${idx * 50}ms` }}>
+                      <a
+                        href={listing.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
+                        onMouseEnter={showPreview(listing.image)}
+                        onMouseLeave={hidePreview}
+                        onFocus={showPreview(listing.image)}
+                        onBlur={hidePreview}
+                      >
+                        <ExternalLinkIcon className="h-4 w-4 shrink-0" />
+                        {listing.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
         </div>
       </div>
       {preview &&

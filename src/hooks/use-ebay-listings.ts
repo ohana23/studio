@@ -10,12 +10,14 @@ export interface EbayListing {
 
 export function useEbayListings(query: string | null) {
   const [links, setLinks] = useState<EbayListing[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!query) return;
     let cancelled = false;
     const fetchListings = async () => {
       try {
+        setLoading(true);
         const res = await fetch(`/api/ebay?q=${encodeURIComponent(query)}`);
         const data = await res.json();
         if (!res.ok) return;
@@ -24,6 +26,8 @@ export function useEbayListings(query: string | null) {
         }
       } catch (err) {
         console.error("eBay listings error:", err);
+      } finally {
+        if (!cancelled) setLoading(false);
       }
     };
     fetchListings();
@@ -32,5 +36,5 @@ export function useEbayListings(query: string | null) {
     };
   }, [query]);
 
-  return links;
+  return { listings: links, loading };
 }
