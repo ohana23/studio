@@ -89,7 +89,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                 <h4 className="text-sm font-medium text-muted-foreground">Purchase on eBay</h4>
                 <ul className="space-y-1">
                   {ebayLinks.map((listing, idx) => (
-                    <li key={idx} className="animate-in fade-in slide-in-from-bottom-1" style={{ animationDelay: `${idx * 50}ms` }}>
+                    <li key={idx} className="animate-in duration-700 fade-in slide-in-from-bottom-1" style={{ animationDelay: `${idx * 50}ms` }}>
                       <a
                         href={listing.url}
                         target="_blank"
