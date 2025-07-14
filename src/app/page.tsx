@@ -11,7 +11,7 @@
 import { products } from "@/lib/products";
 import Image from "next/image";
 import { Fragment, useState } from "react";
-import { useEbayListings } from "@/hooks/use-ebay-listings";
+import { ProductModal } from "@/components/ProductModal";
 
 interface Product {
   year: string;
@@ -21,7 +21,6 @@ interface Product {
 }
 export default function Home() {
   const [openProduct, setOpenProduct] = useState<Product | null>(null);
-  const ebayLinks = useEbayListings(openProduct ? openProduct.title : null);
   return (
     <main className="min-h-screen bg-background font-body text-foreground">
       <div className="container mx-auto max-w-4xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
@@ -71,47 +70,10 @@ export default function Home() {
         </div>
       </div>
         {openProduct && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
-            onClick={() => setOpenProduct(null)}
-          >
-            <div
-              className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
-            >
-              <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
-                {openProduct.image && (
-                  <Image
-                    src={openProduct.image}
-                    alt={openProduct.title}
-                    fill
-                    unoptimized
-                    className="object-contain animate-in zoom-in-95 fade-in"
-                  />
-                )}
-              </div>
-              <div className="text-white md:w-1/2 space-y-2 overflow-y-auto">
-                <h3 className="text-lg font-semibold">{openProduct.year}</h3>
-                <h2 className="text-2xl font-bold">{openProduct.title}</h2>
-                <p className="text-sm">{openProduct.description}</p>
-                {ebayLinks.length > 0 && (
-                  <ul className="space-y-1 pt-2">
-                    {ebayLinks.map((link, idx) => (
-                      <li key={idx}>
-                        <a
-                          href={link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="underline text-blue-400"
-                        >
-                          eBay Link
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-          </div>
+          <ProductModal
+            product={openProduct}
+            onClose={() => setOpenProduct(null)}
+          />
         )}
     </main>
   );
