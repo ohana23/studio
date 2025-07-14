@@ -38,7 +38,7 @@ export default function Home() {
                   </div>
                 )}
                 <div
-                  onClick={() => product.image && setOpenProduct(product)}
+                  onClick={() => setOpenProduct(product)}
                   className="group transition-colors duration-200 ease-in-out hover:bg-accent border-b border-border cursor-pointer"
                 >
                   <div className="p-6">
