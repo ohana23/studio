@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+console.log("EBAY_SANDBOX_APP_ID", process.env.EBAY_SANDBOX_APP_ID);
+
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("q");
