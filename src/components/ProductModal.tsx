@@ -40,20 +40,25 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-sm">{product.description}</p>
           {ebayLinks.length > 0 && (
-            <ul className="space-y-1 pt-2">
-              {ebayLinks.map((link, idx) => (
-                <li key={idx}>
-                  <a
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-blue-400"
-                  >
-                    eBay Link
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="pt-4 space-y-1">
+              <h4 className="text-sm font-medium text-muted-foreground">
+                Purchase on eBay
+              </h4>
+              <ul className="space-y-1">
+                {ebayLinks.map((listing, idx) => (
+                  <li key={idx}>
+                    <a
+                      href={listing.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline text-blue-400"
+                    >
+                      {listing.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       </div>

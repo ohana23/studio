@@ -2,8 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+export interface EbayListing {
+  url: string;
+  title: string;
+}
+
 export function useEbayListings(query: string | null) {
-  const [links, setLinks] = useState<string[]>([]);
+  const [links, setLinks] = useState<EbayListing[]>([]);
 
   useEffect(() => {
     if (!query) return;
@@ -16,7 +21,7 @@ export function useEbayListings(query: string | null) {
         console.log("eBay response:", data);
         if (!res.ok) return;
         if (!cancelled) {
-          setLinks(Array.isArray(data.links) ? data.links : []);
+          setLinks(Array.isArray(data.listings) ? data.listings : []);
         }
       } catch (err) {
         console.error("eBay listings error:", err);
