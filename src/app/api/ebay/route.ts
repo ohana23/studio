@@ -82,7 +82,7 @@ export async function GET(request: NextRequest) {
           item.thumbnailImages?.[0]?.imageUrl ||
           null,
       }))
-      .filter((i) => i.url && i.title);
+      .filter((i: { url: any; title: any; }) => i.url && i.title);
     return NextResponse.json({ listings });
   } catch (err: any) {
     const errorInfo = { ...requestInfo, message: err?.message ?? String(err) };
