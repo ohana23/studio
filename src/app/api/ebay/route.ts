@@ -22,17 +22,23 @@ export async function GET(request: NextRequest) {
   }
 
   const envOverride = searchParams.get("env") || undefined;
-  const { token, endpoint } = getConfig(envOverride || process.env.EBAY_ENV);
+  const { token, endpoint, mode } = getConfig(envOverride || process.env.EBAY_ENV);
+
+  const url = `${endpoint}?q=${encodeURIComponent(query)}&limit=3`;
+  const requestInfo = {
+    endpoint,
+    env: mode,
+    params: { q: query, limit: 3 },
+    url,
+  };
 
   if (!token) {
+    console.error("Missing eBay credentials", requestInfo);
     return NextResponse.json(
       { error: "Missing eBay credentials" },
       { status: 500 }
     );
   }
-
-  const url =
-    `${endpoint}?q=${encodeURIComponent(query)}&limit=3`;
 
   try {
     const res = await fetch(url, {
@@ -42,8 +48,29 @@ export async function GET(request: NextRequest) {
       },
     });
     if (!res.ok) {
-      return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
+      const text = await res.text();
+      let payload: unknown = text;
+      try {
+        payload = JSON.parse(text);
+      } catch {
+        // ignore parsing errors and keep raw text
+      }
+      const errorInfo = {
+        ...requestInfo,
+        status: res.status,
+        statusText: res.statusText,
+        response: payload,
+      };
+      console.error("eBay API request failed", errorInfo);
+      return NextResponse.json(
+        {
+          error: "eBay API request failed",
+          details: errorInfo,
+        },
+        { status: 500 }
+      );
     }
+
     const data = await res.json();
     const items = data.itemSummaries || [];
     const listings = items
@@ -55,9 +82,17 @@ export async function GET(request: NextRequest) {
           item.thumbnailImages?.[0]?.imageUrl ||
           null,
       }))
-      .filter((i) => i.url && i.title);
+      .filter((i: { url: any; title: any; }) => i.url && i.title);
     return NextResponse.json({ listings });
-  } catch (err) {
-    return NextResponse.json({ error: "Failed" }, { status: 500 });
+  } catch (err: any) {
+    const errorInfo = { ...requestInfo, message: err?.message ?? String(err) };
+    console.error("Failed to fetch eBay data", errorInfo);
+    return NextResponse.json(
+      {
+        error: "Failed to fetch eBay data",
+        details: errorInfo,
+      },
+      { status: 500 }
+    );
   }
 }
