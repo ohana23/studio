@@ -1,6 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
-import { ExternalLink } from "lucide-react";
+import { ExternalLinkIcon } from "./ExternalLinkIcon";
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
@@ -88,13 +88,13 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                       href={listing.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-baseline gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
+                      className="inline-flex items-center gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
                       onMouseEnter={showPreview(listing.image)}
                       onMouseLeave={hidePreview}
                       onFocus={showPreview(listing.image)}
                       onBlur={hidePreview}
                     >
-                      <ExternalLink className="mr-1 inline size-4" aria-hidden="true" />
+                      <ExternalLinkIcon className="h-4 w-4 shrink-0" />
                       {listing.title}
                     </a>
                   </li>
