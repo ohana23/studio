@@ -61,7 +61,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
+        className="relative mx-auto flex w-full max-w-5xl flex-col items-center gap-8 md:flex-row md:items-start"
       >
         {product.image && (
           <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
