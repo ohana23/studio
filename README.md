@@ -6,18 +6,19 @@ To get started, take a look at src/app/page.tsx.
 
 ## eBay Listings
 
-The app can fetch live eBay listings for each product using the eBay sandbox.
-To enable this feature you need to provide your sandbox application ID.
+The app fetches live eBay listings using the Browse API. You can target the
+sandbox or production environment.
 
-1. Copy the provided example file and edit the value:
+1. Copy the provided example file and edit the values:
 
    ```bash
    cp .env.example .env.local
-   # open .env.local and replace the placeholder
+   # open .env.local and replace the placeholders
    ```
 
-2. Alternatively, export the variable in your shell before starting the
-   development server.
+2. Set `EBAY_ENV` to either `sandbox` or `production`.
+   - When using the sandbox, provide `EBAY_SANDBOX_OAUTH_TOKEN`.
+   - When using production, provide `EBAY_OAUTH_TOKEN`.
 
-With `EBAY_SANDBOX_APP_ID` defined in `.env.local` (or your environment)
-`process.env.EBAY_SANDBOX_APP_ID` will resolve correctly.
+Alternatively, export the variables in your shell before starting the
+development server.
