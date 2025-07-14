@@ -46,8 +46,17 @@ export async function GET(request: NextRequest) {
     }
     const data = await res.json();
     const items = data.itemSummaries || [];
-    const links = items.map((item: any) => item.itemWebUrl).filter(Boolean);
-    return NextResponse.json({ links });
+    const listings = items
+      .map((item: any) => ({
+        url: item.itemWebUrl,
+        title: item.title,
+        image:
+          item.image?.imageUrl ||
+          item.thumbnailImages?.[0]?.imageUrl ||
+          null,
+      }))
+      .filter((i) => i.url && i.title);
+    return NextResponse.json({ listings });
   } catch (err) {
     return NextResponse.json({ error: "Failed" }, { status: 500 });
   }

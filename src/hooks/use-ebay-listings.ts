@@ -2,24 +2,32 @@
 
 import { useEffect, useState } from "react";
 
+export interface EbayListing {
+  url: string
+  title: string
+  image?: string | null
+}
+
 export function useEbayListings(query: string | null) {
-  const [links, setLinks] = useState<string[]>([]);
+  const [links, setLinks] = useState<EbayListing[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!query) return;
     let cancelled = false;
     const fetchListings = async () => {
-      console.log("Fetching eBay listings...");
       try {
+        setLoading(true);
         const res = await fetch(`/api/ebay?q=${encodeURIComponent(query)}`);
         const data = await res.json();
-        console.log("eBay response:", data);
         if (!res.ok) return;
         if (!cancelled) {
-          setLinks(Array.isArray(data.links) ? data.links : []);
+          setLinks(Array.isArray(data.listings) ? data.listings : []);
         }
       } catch (err) {
         console.error("eBay listings error:", err);
+      } finally {
+        if (!cancelled) setLoading(false);
       }
     };
     fetchListings();
@@ -28,5 +36,5 @@ export function useEbayListings(query: string | null) {
     };
   }, [query]);
 
-  return links;
+  return { listings: links, loading };
 }

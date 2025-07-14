@@ -1,5 +1,9 @@
 import Image from "next/image";
 import clsx from "clsx";
+import { ExternalLinkIcon } from "./ExternalLinkIcon";
+import { Spinner } from "./Spinner";
+import { createPortal } from "react-dom";
+import { useState } from "react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
 
 interface Product {
@@ -15,7 +19,41 @@ interface ProductModalProps {
 }
 
 export function ProductModal({ product, onClose }: ProductModalProps) {
-  const ebayLinks = useEbayListings(product.title);
+  const { listings: ebayLinks, loading } = useEbayListings(product.title);
+  const [preview, setPreview] = useState<{
+    src: string;
+    x: number;
+    y: number;
+  } | null>(null);
+
+  const canHover = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover)").matches;
+
+  const showPreview = (
+    src: string | null | undefined,
+  ) =>
+    (
+      e: React.MouseEvent<HTMLAnchorElement> |
+        React.FocusEvent<HTMLAnchorElement>
+    ) => {
+      if (!src) return;
+      if (e.type !== "focus" && !canHover()) return;
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      const width = 160;
+      const height = 160;
+      let x = rect.left;
+      let y = rect.bottom + 8;
+      if (x + width > window.innerWidth) {
+        x = window.innerWidth - width - 8;
+      }
+      if (y + height > window.innerHeight) {
+        y = rect.top - height - 8;
+      }
+      setPreview({ src, x, y });
+    };
+
+  const hidePreview = () => setPreview(null);
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
@@ -39,24 +77,53 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           <h3 className="text-lg font-semibold">{product.year}</h3>
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-sm">{product.description}</p>
-          {ebayLinks.length > 0 && (
-            <ul className="space-y-1 pt-2">
-              {ebayLinks.map((link, idx) => (
-                <li key={idx}>
-                  <a
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-blue-400"
-                  >
-                    eBay Link
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
+          <div className="pt-4 space-y-1">
+            {loading && (
+              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <Spinner className="h-4 w-4" />
+                Searching eBay...
+              </div>
+            )}
+            {!loading && ebayLinks.length > 0 && (
+              <>
+                <h4 className="text-sm font-medium text-muted-foreground">Purchase on eBay</h4>
+                <ul className="space-y-1">
+                  {ebayLinks.map((listing, idx) => (
+                    <li key={idx} className="animate-in fade-in slide-in-from-bottom-1" style={{ animationDelay: `${idx * 50}ms` }}>
+                      <a
+                        href={listing.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
+                        onMouseEnter={showPreview(listing.image)}
+                        onMouseLeave={hidePreview}
+                        onFocus={showPreview(listing.image)}
+                        onBlur={hidePreview}
+                      >
+                        <ExternalLinkIcon className="h-4 w-4 shrink-0" />
+                        {listing.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+          </div>
         </div>
       </div>
+      {preview &&
+        createPortal(
+          <Image
+            src={preview.src}
+            alt=""
+            width={160}
+            height={160}
+            unoptimized
+            className="pointer-events-none fixed z-50 rounded-md border bg-background object-cover shadow-lg"
+            style={{ top: preview.y, left: preview.x }}
+          />,
+          document.body,
+        )}
     </div>
   );
 }
