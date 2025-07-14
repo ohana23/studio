@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 
 export interface EbayListing {
-  url: string;
-  title: string;
+  url: string
+  title: string
+  image?: string | null
 }
 
 export function useEbayListings(query: string | null) {

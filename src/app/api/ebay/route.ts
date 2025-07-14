@@ -50,6 +50,10 @@ export async function GET(request: NextRequest) {
       .map((item: any) => ({
         url: item.itemWebUrl,
         title: item.title,
+        image:
+          item.image?.imageUrl ||
+          item.thumbnailImages?.[0]?.imageUrl ||
+          null,
       }))
       .filter((i) => i.url && i.title);
     return NextResponse.json({ listings });

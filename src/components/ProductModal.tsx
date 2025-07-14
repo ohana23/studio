@@ -1,5 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
+import { ExternalLink } from "lucide-react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
 
 interface Product {
@@ -46,15 +47,26 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               </h4>
               <ul className="space-y-1">
                 {ebayLinks.map((listing, idx) => (
-                  <li key={idx}>
+                  <li key={idx} className="relative group">
                     <a
                       href={listing.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="underline text-blue-400"
+                      className="flex items-center gap-1 text-white no-underline transition-opacity hover:opacity-70 focus-visible:opacity-70"
                     >
                       {listing.title}
+                      <ExternalLink className="size-4" aria-hidden="true" />
                     </a>
+                    {listing.image && (
+                      <Image
+                        src={listing.image}
+                        alt=""
+                        width={160}
+                        height={160}
+                        unoptimized
+                        className="pointer-events-none absolute left-0 top-full z-10 mt-2 hidden rounded-md border bg-background object-cover shadow-lg group-hover:block group-focus-visible:block"
+                      />
+                    )}
                   </li>
                 ))}
               </ul>
