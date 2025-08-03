@@ -18,7 +18,9 @@ sandbox or production environment.
 
 2. Set `EBAY_ENV` to either `sandbox` or `production`.
    - When using the sandbox, provide `EBAY_SANDBOX_OAUTH_TOKEN`.
-   - When using production, provide `EBAY_OAUTH_TOKEN`.
+   - For production you can either set `EBAY_OAUTH_TOKEN` manually or supply
+     `EBAY_PROD_CLIENT_ID`, `EBAY_PROD_CLIENT_SECRET` and
+     `EBAY_PROD_REFRESH_TOKEN` to enable automatic token refresh.
 
 3. Set `EBAY_CAMPAIGN_ID` to your eBay Partner Network campaign ID so links
    include your affiliate tracking. Example:

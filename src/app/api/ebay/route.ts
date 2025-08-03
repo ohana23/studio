@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getAccessToken } from "@/lib/ebayAuth";
 
 const ENDPOINTS = {
   sandbox: "https://api.sandbox.ebay.com/buy/browse/v1/item_summary/search",
@@ -14,11 +15,7 @@ function appendCampId(url: string) {
 
 function getConfig(env?: string) {
   const mode = env === "production" ? "production" : "sandbox";
-  const token =
-    mode === "production"
-      ? process.env.EBAY_OAUTH_TOKEN
-      : process.env.EBAY_SANDBOX_OAUTH_TOKEN;
-  return { mode, token, endpoint: ENDPOINTS[mode] };
+  return { mode, endpoint: ENDPOINTS[mode] };
 }
 
 export async function GET(request: NextRequest) {
@@ -29,7 +26,8 @@ export async function GET(request: NextRequest) {
   }
 
   const envOverride = searchParams.get("env") || undefined;
-  const { token, endpoint, mode } = getConfig(envOverride || process.env.EBAY_ENV);
+  const { endpoint, mode } = getConfig(envOverride || process.env.EBAY_ENV);
+  const token = await getAccessToken(mode);
 
   const url = `${endpoint}?q=${encodeURIComponent(query)}&limit=3`;
   const requestInfo = {
