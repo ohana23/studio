@@ -6,6 +6,13 @@ const ENDPOINTS = {
   production: "https://api.ebay.com/buy/browse/v1/item_summary/search",
 } as const;
 
+const CAMP_ID = process.env.EBAY_CAMPAIGN_ID || "5339118344";
+
+function appendCampId(url: string) {
+  const separator = url.includes("?") ? "&" : "?";
+  return `${url}${separator}campid=${CAMP_ID}`;
+}
+
 function getConfig(env?: string) {
   const mode = env === "production" ? "production" : "sandbox";
   return { mode, endpoint: ENDPOINTS[mode] };
@@ -73,14 +80,14 @@ export async function GET(request: NextRequest) {
     const items = data.itemSummaries || [];
     const listings = items
       .map((item: any) => ({
-        url: item.itemWebUrl,
+        url: item.itemWebUrl ? appendCampId(item.itemWebUrl) : null,
         title: item.title,
         image:
           item.image?.imageUrl ||
           item.thumbnailImages?.[0]?.imageUrl ||
           null,
       }))
-      .filter((i: { url: any; title: any; }) => i.url && i.title);
+      .filter((i: { url: string | null; title: any }) => i.url && i.title);
     return NextResponse.json({ listings });
   } catch (err: any) {
     const errorInfo = { ...requestInfo, message: err?.message ?? String(err) };

@@ -22,5 +22,12 @@ sandbox or production environment.
      `EBAY_PROD_CLIENT_ID`, `EBAY_PROD_CLIENT_SECRET` and
      `EBAY_PROD_REFRESH_TOKEN` to enable automatic token refresh.
 
+3. Set `EBAY_CAMPAIGN_ID` to your eBay Partner Network campaign ID so links
+   include your affiliate tracking. Example:
+
+   ```bash
+   EBAY_CAMPAIGN_ID=5339118344
+   ```
+
 Alternatively, export the variables in your shell before starting the
 development server.
