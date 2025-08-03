@@ -20,5 +20,12 @@ sandbox or production environment.
    - When using the sandbox, provide `EBAY_SANDBOX_OAUTH_TOKEN`.
    - When using production, provide `EBAY_OAUTH_TOKEN`.
 
+3. Set `EBAY_CAMPAIGN_ID` to your eBay Partner Network campaign ID so links
+   include your affiliate tracking. Example:
+
+   ```bash
+   EBAY_CAMPAIGN_ID=5339118344
+   ```
+
 Alternatively, export the variables in your shell before starting the
 development server.
