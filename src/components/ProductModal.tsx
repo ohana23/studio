@@ -56,8 +56,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
   const hidePreview = () => setPreview(null);
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
-      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4"
     >
       <div
         className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
@@ -73,7 +72,8 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
             />
           </div>
         )}
-        <div className={clsx("text-white space-y-2 overflow-y-auto", product.image ? "md:w-1/2" : "w-full")}>
+        <div className={clsx("text-black space-y-2 overflow-y-auto", product.image ? "md:w-1/2" : "w-full")}>
+        <p className="text-black cursor-pointer font-semibold transition-opacity hover:opacity-50 focus-visible:opacity-50 py-4" onClick={onClose}>&larr; Back to all products</p>
           <h3 className="text-lg font-semibold">{product.year}</h3>
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-sm">{product.description}</p>
@@ -98,7 +98,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                         href={listing.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-4 text-white no-underline transition-opacity hover:opacity-50 focus-visible:opacity-50"
+                        className="inline-flex items-center gap-4 text-black no-underline transition-opacity hover:opacity-50 focus-visible:opacity-50"
                         onMouseEnter={showPreview(listing.image)}
                         onMouseLeave={hidePreview}
                         onFocus={showPreview(listing.image)}
