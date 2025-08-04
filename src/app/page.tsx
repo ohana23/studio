@@ -40,10 +40,10 @@ export default function Home() {
         </h1>
         <section className="mb-16">
           <h2 className="text-2xl font-semibold text-center mb-8">Featured Products</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-            {featuredProducts.map((product, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {featuredProducts.map((product) => (
               <div
-                key={index}
+                key={product.title}
                 onClick={() => setOpenProduct(product)}
                 className="cursor-pointer text-center transition-colors hover:bg-accent p-4 rounded-md"
               >
