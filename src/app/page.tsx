@@ -68,6 +68,10 @@ export default function Home() {
             );
           })}
         </div>
+        <div className="text-muted-foreground py-16 text-sm">
+          <h5 className="font-semibold">This site uses affiliate links.</h5>
+          Products on this website use eBay affiliate links. If you purchase an item through one of these links, I receive a small payment around 2-4%. It's how I pay some of the monthly hosting costs associated with this site.
+        </div>
       </div>
         {openProduct && (
           <ProductModal
