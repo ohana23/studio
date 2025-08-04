@@ -1,11 +1,11 @@
-let prodToken: string | null = null;
+let prodToken: string | undefined;
 let prodExpiry = 0;
 
 /**
  * Returns an OAuth access token for the specified environment. Sandbox tokens
  * are read directly from the environment variable. Production tokens are
- * automatically refreshed using the refresh token flow if client credentials
- * are provided.
+ * obtained using the client‑credentials grant and cached in memory until they
+ * expire.
  */
 export async function getAccessToken(env: 'sandbox' | 'production'): Promise<string | undefined> {
   if (env === 'sandbox') {
@@ -19,16 +19,14 @@ export async function getAccessToken(env: 'sandbox' | 'production'): Promise<str
 
   const clientId = process.env.EBAY_PROD_CLIENT_ID;
   const clientSecret = process.env.EBAY_PROD_CLIENT_SECRET;
-  const refreshToken = process.env.EBAY_PROD_REFRESH_TOKEN;
 
-  if (!clientId || !clientSecret || !refreshToken) {
+  if (!clientId || !clientSecret) {
     return process.env.EBAY_OAUTH_TOKEN;
   }
 
   const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
   const params = new URLSearchParams();
-  params.append('grant_type', 'refresh_token');
-  params.append('refresh_token', refreshToken);
+  params.append('grant_type', 'client_credentials');
   // Using the basic browse scope
   params.append('scope', 'https://api.ebay.com/oauth/api_scope');
 
@@ -43,7 +41,7 @@ export async function getAccessToken(env: 'sandbox' | 'production'): Promise<str
 
   if (!res.ok) {
     const text = await res.text();
-    console.error('Failed to refresh eBay token', { status: res.status, text });
+    console.error('Failed to fetch eBay token', { status: res.status, text });
     return process.env.EBAY_OAUTH_TOKEN;
   }
 

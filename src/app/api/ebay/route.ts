@@ -13,8 +13,11 @@ function appendCampId(url: string) {
   return `${url}${separator}campid=${CAMP_ID}`;
 }
 
-function getConfig(env?: string) {
-  const mode = env === "production" ? "production" : "sandbox";
+function getConfig(env?: string): {
+  mode: "sandbox" | "production";
+  endpoint: string;
+} {
+  const mode: "sandbox" | "production" = env === "production" ? "production" : "sandbox";
   return { mode, endpoint: ENDPOINTS[mode] };
 }
 
