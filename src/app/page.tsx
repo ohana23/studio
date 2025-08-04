@@ -21,12 +21,49 @@ interface Product {
 }
 export default function Home() {
   const [openProduct, setOpenProduct] = useState<Product | null>(null);
+  const featuredProductTitles = [
+    "Twentieth Anniversary Macintosh",
+    "iMac G3",
+    "iPhone (1st generation)",
+    "iPod Mini (1st gen)",
+    "Power Mac G5",
+    "Power Mac G4 Cube",
+  ];
+  const featuredProducts = featuredProductTitles
+    .map((title) => products.find((p) => p.title === title))
+    .filter(Boolean) as Product[];
   return (
     <main className="min-h-screen bg-background font-body text-foreground">
       <div className="container mx-auto max-w-4xl py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <h1 className="text-4xl md:text-8xl font-bold text-center mb-16 font-headline tracking-tight">
           Made by Apple
         </h1>
+        <section className="mb-16">
+          <h2 className="text-2xl font-semibold text-center mb-4">Featured Vintage Products</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+            {featuredProducts.map((product, index) => (
+              <div
+                key={product.title}
+                onClick={() => setOpenProduct(product)}
+                className="cursor-pointer text-center transition-colors hover:bg-accent p-2"
+              >
+                {product.image && (
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    width={160}
+                    height={160}
+                    unoptimized
+                    className="mx-auto h-32 w-32 object-contain"
+                  />
+                )}
+                <h3 className="mt-4 font-semibold">{product.title}</h3>
+                <p className="text-sm text-muted-foreground">{product.year}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        <h2 className="text-2xl font-semibold text-center mb-4">All Products</h2>
         <div className="border-t border-border">
           {products.map((product, index) => {
             const showYearHeader = index === 0 || product.year !== products[index - 1].year;
