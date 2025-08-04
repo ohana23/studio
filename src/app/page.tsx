@@ -43,7 +43,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {featuredProducts.map((product, index) => (
               <div
-                key={index}
+                key={product.title}
                 onClick={() => setOpenProduct(product)}
                 className="cursor-pointer text-center transition-colors hover:bg-accent p-2"
               >
