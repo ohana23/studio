@@ -26,7 +26,7 @@ sandbox or production environment.
    include your affiliate tracking. Example:
 
    ```bash
-   EBAY_CAMPAIGN_ID=5339118344
+   EBAY_CAMPAIGN_ID=0123456789
    ```
 
 Alternatively, export the variables in your shell before starting the
