@@ -62,6 +62,16 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
       <div
         className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
       >
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose();
+          }}
+          className="absolute top-4 right-4 flex h-[50px] w-[50px] items-center justify-center rounded-full bg-gray-500 text-white"
+          aria-label="Close"
+        >
+          X
+        </button>
         {product.image && (
           <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
             <Image
