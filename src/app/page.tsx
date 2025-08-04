@@ -39,13 +39,13 @@ export default function Home() {
           Made by Apple
         </h1>
         <section className="mb-16">
-          <h2 className="text-2xl font-semibold text-center mb-8">Featured Products</h2>
+          <h2 className="text-2xl font-semibold text-center mb-4">Featured Vintage Products</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {featuredProducts.map((product, index) => (
               <div
                 key={index}
                 onClick={() => setOpenProduct(product)}
-                className="cursor-pointer text-center transition-colors hover:bg-accent p-4 rounded-md"
+                className="cursor-pointer text-center transition-colors hover:bg-accent p-2"
               >
                 {product.image && (
                   <Image
@@ -63,6 +63,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+        <h2 className="text-2xl font-semibold text-center mb-4">All Products</h2>
         <div className="border-t border-border">
           {products.map((product, index) => {
             const showYearHeader = index === 0 || product.year !== products[index - 1].year;
