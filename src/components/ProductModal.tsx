@@ -11,7 +11,7 @@ import {
   useMotionTemplate,
   useSpring,
   useTransform,
-} from "motion/react";
+} from "framer-motion";
 
 export const MARGIN = 16;
 export const MAX_BLUR = 12;
