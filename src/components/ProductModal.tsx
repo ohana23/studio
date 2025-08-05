@@ -5,6 +5,18 @@ import { Spinner } from "./Spinner";
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
+import {
+  motion,
+  PanInfo,
+  useMotionTemplate,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+
+export const MARGIN = 16;
+export const MAX_BLUR = 12;
+export const MAX_OPACITY = 0.2;
+export const DISMISS_DISTANCE = 50;
 
 interface Product {
   year: string;
@@ -25,6 +37,8 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
     x: number;
     y: number;
   } | null>(null);
+  const [height, setHeight] = useState(0);
+  const y = useSpring(0, { damping: 50, stiffness: 550 });
 
   const canHover = () =>
     typeof window !== "undefined" &&
@@ -54,26 +68,84 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
     };
 
   const hidePreview = () => setPreview(null);
+
+  function onPanStart() {
+    grab.start();
+  }
+
+  function onPanEnd(_: PointerEvent, { velocity }: PanInfo) {
+    grab.end();
+
+    if (y.get() < 0) {
+      y.set(0);
+      return;
+    }
+
+    const projectedY = y.get() + project(velocity.y);
+
+    if (projectedY >= DISMISS_DISTANCE) {
+      y.set(height + MARGIN);
+      setTimeout(onClose, 200);
+      return;
+    }
+
+    y.set(0);
+  }
+
+  function onPan(_: PointerEvent, { offset }: PanInfo) {
+    let newY = offset.y;
+    newY = dampen(newY, [0, height]);
+    y.jump(newY);
+  }
+
+  const blur = useTransform(y, [0, height], [MAX_BLUR, 0]);
+  const opacity = useTransform(y, [0, height], [MAX_OPACITY, 0]);
+
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4"
-    >
-      <div
-        className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
+    <>
+      <motion.div
+        style={{ opacity, backdropFilter: useMotionTemplate`blur(${blur}px)` }}
+        className="fixed inset-0 z-40 bg-black"
+        onClick={() => {
+          y.set(height + MARGIN);
+          setTimeout(onClose, 200);
+        }}
+      />
+      <motion.div
+        onPanStart={onPanStart}
+        onPanEnd={onPanEnd}
+        onPan={onPan}
+        ref={(node: HTMLDivElement | null) => {
+          const bounds = node?.getBoundingClientRect();
+          if (bounds) setHeight(bounds.height);
+        }}
+        className="fixed left-2 right-2 bottom-2 z-50 w-[calc(100%_-_16px)] max-h-[80vh] overflow-y-auto rounded-[32px] bg-white p-4 cursor-grab active:cursor-grabbing dark:bg-gray3 max-sm:rounded-16"
+        style={{ y } as React.CSSProperties}
       >
+        <motion.div className="w-10 h-1 bg-gray7 rounded-full mx-auto mb-4" />
         {product.image && (
-          <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
+          <div className="relative mb-4 h-48 w-full">
             <Image
               src={product.image}
               alt={product.title}
               fill
               unoptimized
-              className="object-contain animate-in zoom-in-95 fade-in"
+              className="object-contain"
             />
           </div>
         )}
-        <div className={clsx("text-black space-y-2 overflow-y-auto", product.image ? "md:w-1/2" : "w-full")}>
-        <p className="text-black cursor-pointer font-semibold transition-opacity hover:opacity-50 focus-visible:opacity-50 py-4" onClick={onClose}>&larr; Back to all products</p>
+        <div
+          className={clsx(
+            "text-black space-y-2",
+            product.image ? "" : "",
+          )}
+        >
+          <p
+            className="text-black cursor-pointer font-semibold transition-opacity hover:opacity-50 focus-visible:opacity-50"
+            onClick={onClose}
+          >
+            &larr; Back to all products
+          </p>
           <h3 className="text-lg font-semibold">{product.year}</h3>
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-sm">{product.description}</p>
@@ -86,7 +158,9 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
             )}
             {!loading && ebayLinks.length > 0 && !error && (
               <>
-                <h4 className="text-sm font-medium text-muted-foreground">Purchase on eBay</h4>
+                <h4 className="text-sm font-medium text-muted-foreground">
+                  Purchase on eBay
+                </h4>
                 <ul className="space-y-2">
                   {ebayLinks.map((listing, idx) => (
                     <li
@@ -112,16 +186,18 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
                 </ul>
                 <div className="text-muted-foreground py-4 text-sm">
                   <h5 className="font-semibold">This site uses affiliate links.</h5>
-                    Products on this website use eBay affiliate links. If you purchase an item through one of these links, I receive a small payment around 2-4%. It's how I pay some of the monthly hosting costs associated with this site.
+                  Products on this website use eBay affiliate links. If you purchase an item through one of these links, I receive a small payment around 2-4%. It's how I pay some of the monthly hosting costs associated with this site.
                 </div>
               </>
             )}
             {!loading && (ebayLinks.length === 0 || error) && (
-              <h4 className="text-sm font-medium text-muted-foreground">No matching items on eBay right now.</h4>
+              <h4 className="text-sm font-medium text-muted-foreground">
+                No matching items on eBay right now.
+              </h4>
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
       {preview &&
         createPortal(
           <Image
@@ -135,6 +211,31 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           />,
           document.body,
         )}
-    </div>
+    </>
   );
 }
+
+export function project(initialVelocity: number, decelerationRate = 0.998) {
+  return (
+    (initialVelocity / 1000) * decelerationRate / (1 - decelerationRate)
+  );
+}
+
+function dampen(val: number, [min, max]: [number, number], factor = 2) {
+  if (val > max) {
+    const extra = val - max;
+    const dampenedExtra = extra > 0 ? Math.sqrt(extra) : -Math.sqrt(-extra);
+    return max + dampenedExtra * factor;
+  } else if (val < min) {
+    const extra = val - min;
+    const dampenedExtra = extra > 0 ? Math.sqrt(extra) : -Math.sqrt(-extra);
+    return min + dampenedExtra * factor;
+  } else {
+    return val;
+  }
+}
+
+export const grab = {
+  start: () => document.body.classList.add("gesture-grabbing"),
+  end: () => document.body.classList.remove("gesture-grabbing"),
+};
