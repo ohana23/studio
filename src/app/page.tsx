@@ -22,12 +22,12 @@ interface Product {
 export default function Home() {
   const [openProduct, setOpenProduct] = useState<Product | null>(null);
   const featuredProductTitles = [
-    "Twentieth Anniversary Macintosh",
-    "iMac G3",
     "iPhone (1st generation)",
     "iPod Mini (1st gen)",
+    "iMac G3",
     "Power Mac G5",
     "Power Mac G4 Cube",
+    "Twentieth Anniversary Macintosh",
   ];
   const featuredProducts = featuredProductTitles
     .map((title) => products.find((p) => p.title === title))
