@@ -5,6 +5,7 @@ import { Spinner } from "./Spinner";
 import { createPortal } from "react-dom";
 import { useState } from "react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
+import { X } from "lucide-react";
 
 interface Product {
   year: string;
@@ -57,6 +58,14 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4 animate-in fade-in duration-300"
     >
+      {/* Close button - fixed to viewport */}
+      <button
+        onClick={onClose}
+        className="fixed top-8 right-8 z-[60] flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 border border-gray-200 transition-all hover:bg-gray-200 focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:ring-offset-2"
+        aria-label="Close modal"
+      >
+        <X className="h-6 w-6 text-gray-600" />
+      </button>
       <div
         className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row animate-in slide-in-from-bottom-6 duration-500"
       >
@@ -72,7 +81,6 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           </div>
         )}
         <div className={clsx("text-black space-y-2 overflow-y-auto", product.image ? "md:w-1/2" : "w-full")}>
-        <p className="text-black cursor-pointer font-semibold transition-opacity hover:opacity-50 focus-visible:opacity-50 py-4" onClick={onClose}>&larr; Back to all products</p>
           <h3 className="text-lg font-semibold">{product.year}</h3>
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-sm">{product.description}</p>
