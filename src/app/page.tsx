@@ -11,8 +11,9 @@
 import { products } from "@/lib/products";
 import { getSlugByProduct } from "@/lib/slugs";
 import Image from "next/image";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useRouter } from "next/navigation";
+import { SearchFilter } from "@/components/SearchFilter";
 
 interface Product {
   year: string;
@@ -22,6 +23,8 @@ interface Product {
 }
 export default function Home() {
   const router = useRouter();
+  const [filteredProducts, setFilteredProducts] = useState(products);
+  
   const featuredProductTitles = [
     "iPhone (1st generation)",
     "iPod Mini (1st gen)",
@@ -68,9 +71,13 @@ export default function Home() {
           </div>
         </section>
         <h2 className="text-2xl font-semibold text-center mb-4">All Products</h2>
+        
+        {/* Search and Filter Component */}
+        <SearchFilter products={products} onFilteredProducts={setFilteredProducts} />
+        
         <div className="border-t border-border">
-          {products.map((product, index) => {
-            const showYearHeader = index === 0 || product.year !== products[index - 1].year;
+          {filteredProducts.map((product, index) => {
+            const showYearHeader = index === 0 || product.year !== filteredProducts[index - 1].year;
             const slug = getSlugByProduct(product);
             return (
               <Fragment key={index}>
