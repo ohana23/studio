@@ -55,11 +55,10 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
 
   const hidePreview = () => setPreview(null);
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4"
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4 animate-in fade-in duration-300"
     >
       <div
-        className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
+        className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row animate-in slide-in-from-bottom-6 duration-500"
       >
         {product.image && (
           <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
@@ -68,7 +67,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               alt={product.title}
               fill
               unoptimized
-              className="object-contain animate-in zoom-in-95 fade-in"
+              className="object-contain animate-in zoom-in-95 fade-in duration-700"
             />
           </div>
         )}
