@@ -17,11 +17,17 @@ The application now includes a comprehensive search and filtering system that al
 - **Clear filtering**: Easy to reset to show all years
 
 ### 📱 Device Type Filter
-- **Smart categorization**: Automatically categorizes products into:
-  - **Mobile**: iPhone, iPad, iPod products
-  - **Computer**: Mac, Power Mac, iMac products
-  - **Wearable**: Apple Watch products
-  - **Accessory**: Printers, monitors, disk drives
+- **Smart categorization**: Automatically categorizes products into Apple product families:
+  - **Mac Family**: MacBook Air, MacBook Pro, iMac, Mac mini, Mac Studio, Mac Pro, Studio/Pro Display, and legacy Macs
+  - **iPhones**: All iPhone models
+  - **iPads**: iPad, iPad mini, iPad Air, iPad Pro, and related tablet hardware
+  - **iPods**: All iPod models
+  - **Watches**: Apple Watch and Apple Watch variants
+  - **Spatial Computing**: Apple Vision Pro and related spatial computing devices
+  - **Personal Audio**: AirPods, AirPods Pro, AirPods Max, Beats headphones, and iPod Hi-Fi
+  - **TV & Home**: Apple TV, HomePod, HomePod mini, and related remotes and home devices
+  - **Core Accessories & Peripherals**: Magic Keyboard, Magic Trackpad, Magic Mouse, Apple Pencil, displays, cables, adapters, chargers, and Mac Pro accessories
+  - **Historic & Experimental Lines**: Apple I/II/III, Lisa, Newton, Pippin, QuickTake cameras, eMate, LaserWriter/ImageWriter printers, and vintage networking gear
   - **Other**: Products that don't fit other categories
 
 ### 🎯 Filter Management
