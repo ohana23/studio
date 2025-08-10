@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { ExternalLinkIcon } from "./ExternalLinkIcon";
 import { Spinner } from "./Spinner";
 import { createPortal } from "react-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
 import { X } from "lucide-react";
 
@@ -20,12 +20,22 @@ interface ProductModalProps {
 }
 
 export function ProductModal({ product, onClose }: ProductModalProps) {
-  const { listings: ebayLinks, loading, error } = useEbayListings(product.title);
+  const [shouldFetchEbay, setShouldFetchEbay] = useState(false);
+  const { listings: ebayLinks, loading, error } = useEbayListings(shouldFetchEbay ? product.title : null);
   const [preview, setPreview] = useState<{
     src: string;
     x: number;
     y: number;
   } | null>(null);
+
+  // Delay eBay fetch to improve initial modal performance
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldFetchEbay(true);
+    }, 100); // Short delay to allow modal to render first
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const canHover = () =>
     typeof window !== "undefined" &&
@@ -55,8 +65,25 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
     };
 
   const hidePreview = () => setPreview(null);
+  // Prevent body scroll on Safari
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = 'hidden';
+    
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4 animate-in fade-in duration-300"
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4 animate-in fade-in duration-300"
+      onClick={(e) => {
+        // Close modal when clicking backdrop
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
     >
       {/* Close button - fixed to viewport */}
       <button
@@ -89,6 +116,12 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                 <Spinner className="h-4 w-4" />
                 Searching eBay...
+              </div>
+            )}
+            {!shouldFetchEbay && (
+              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                <Spinner className="h-4 w-4" />
+                Loading...
               </div>
             )}
             {!loading && ebayLinks.length > 0 && !error && (
@@ -129,7 +162,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           </div>
         </div>
       </div>
-      {preview &&
+      {preview && typeof window !== 'undefined' &&
         createPortal(
           <Image
             src={preview.src}
