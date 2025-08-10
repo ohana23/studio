@@ -8,7 +8,7 @@ import { ProductModal } from '@/components/ProductModal';
 
 interface InterceptedProductPageProps {
   params: Promise<{
-    slug: string;
+    slug: string; // Now represents an index, but keeping same name for compatibility
   }>;
 }
 

@@ -9,7 +9,7 @@
 'use client'
 
 import { products } from "@/lib/products";
-import { getSlugByProduct } from "@/lib/slugs";
+import { getIndexByProduct } from "@/lib/slugs";
 import Image from "next/image";
 import { Fragment, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -30,7 +30,7 @@ export default function Home() {
     if (typeof window !== 'undefined') {
       // Preload the modal route chunk by prefetching a product route
       // This ensures the modal chunk is loaded before it's needed
-      router.prefetch('/product/iphone-1st-generation'); // Use a real slug that exists
+      router.prefetch('/product/1612'); // Use index for iPhone (1st generation)
     }
   }, [router]);
   
@@ -55,11 +55,11 @@ export default function Home() {
           <h2 className="text-2xl font-semibold text-center mb-4">Featured Vintage Products</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {featuredProducts.map((product, index) => {
-              const slug = getSlugByProduct(product);
+              const productIndex = getIndexByProduct(product);
               return (
                 <div
                   key={product.title}
-                  onClick={() => slug && router.push(`/product/${slug}`)}
+                  onClick={() => productIndex !== undefined && router.push(`/product/${productIndex}`)}
                   className="cursor-pointer text-center transition-colors hover:bg-accent p-2"
                 >
                 {product.image && (
@@ -87,7 +87,7 @@ export default function Home() {
         <div className="border-t border-border">
           {filteredProducts.map((product, index) => {
             const showYearHeader = index === 0 || product.year !== filteredProducts[index - 1].year;
-            const slug = getSlugByProduct(product);
+            const productIndex = getIndexByProduct(product);
             return (
               <Fragment key={index}>
                 {showYearHeader && (
@@ -96,7 +96,7 @@ export default function Home() {
                   </div>
                 )}
                 <div
-                  onClick={() => slug && router.push(`/product/${slug}`)}
+                  onClick={() => productIndex !== undefined && router.push(`/product/${productIndex}`)}
                   className="group transition-colors duration-200 ease-in-out hover:bg-accent border-b border-border cursor-pointer"
                 >
                   <div className="p-6">
