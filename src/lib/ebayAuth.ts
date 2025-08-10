@@ -37,6 +37,8 @@ export async function getAccessToken(env: 'sandbox' | 'production'): Promise<str
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: params.toString(),
+    // Add timeout to prevent hanging requests
+    signal: AbortSignal.timeout(10000), // 10 second timeout
   });
 
   if (!res.ok) {

@@ -21,11 +21,22 @@ export default function InterceptedProductPage({ params }: InterceptedProductPag
     notFound();
   }
 
+  const handleClose = () => {
+    // Safari-compatible navigation using window.history instead of router.back()
+    // This prevents issues with parallel routes in Safari
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      window.history.back();
+    } else {
+      // Fallback to navigate to home page
+      router.push('/');
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 animate-in fade-in duration-300">
       <ProductModal
         product={product}
-        onClose={() => router.back()}
+        onClose={handleClose}
       />
     </div>
   );
