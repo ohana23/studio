@@ -54,8 +54,6 @@ export async function GET(request: NextRequest) {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      // Add timeout to prevent hanging requests
-      signal: AbortSignal.timeout(8000), // 8 second timeout
     });
     if (!res.ok) {
       const text = await res.text();

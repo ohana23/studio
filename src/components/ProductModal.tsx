@@ -3,9 +3,8 @@ import clsx from "clsx";
 import { ExternalLinkIcon } from "./ExternalLinkIcon";
 import { Spinner } from "./Spinner";
 import { createPortal } from "react-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useEbayListings } from "@/hooks/use-ebay-listings";
-import { X } from "lucide-react";
 
 interface Product {
   year: string;
@@ -20,22 +19,12 @@ interface ProductModalProps {
 }
 
 export function ProductModal({ product, onClose }: ProductModalProps) {
-  const [shouldFetchEbay, setShouldFetchEbay] = useState(false);
-  const { listings: ebayLinks, loading, error } = useEbayListings(shouldFetchEbay ? product.title : null);
+  const { listings: ebayLinks, loading, error } = useEbayListings(product.title);
   const [preview, setPreview] = useState<{
     src: string;
     x: number;
     y: number;
   } | null>(null);
-
-  // Delay eBay fetch to improve initial modal performance
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShouldFetchEbay(true);
-    }, 100); // Short delay to allow modal to render first
-    
-    return () => clearTimeout(timer);
-  }, []);
 
   const canHover = () =>
     typeof window !== "undefined" &&
@@ -65,36 +54,12 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
     };
 
   const hidePreview = () => setPreview(null);
-  // Prevent body scroll on Safari
-  useEffect(() => {
-    const originalStyle = window.getComputedStyle(document.body).overflow;
-    document.body.style.overflow = 'hidden';
-    
-    return () => {
-      document.body.style.overflow = originalStyle;
-    };
-  }, []);
-
   return (
-    <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4 animate-in fade-in duration-300"
-      onClick={(e) => {
-        // Close modal when clicking backdrop
-        if (e.target === e.currentTarget) {
-          onClose();
-        }
-      }}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-white/100 p-4"
     >
-      {/* Close button - fixed to viewport */}
-      <button
-        onClick={onClose}
-        className="fixed top-8 right-8 z-[60] flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 border border-gray-200 transition-all hover:bg-gray-200 focus-visible:ring-2 focus-visible:ring-gray-300 focus-visible:ring-offset-2"
-        aria-label="Close modal"
-      >
-        <X className="h-6 w-6 text-gray-600" />
-      </button>
       <div
-        className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row animate-in slide-in-from-bottom-6 duration-500"
+        className="relative mx-auto flex max-h-full w-full max-w-5xl flex-col items-center gap-8 md:flex-row"
       >
         {product.image && (
           <div className="relative h-96 w-full md:h-[80vh] md:w-1/2">
@@ -103,11 +68,12 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               alt={product.title}
               fill
               unoptimized
-              className="object-contain animate-in zoom-in-95 fade-in duration-700"
+              className="object-contain animate-in zoom-in-95 fade-in"
             />
           </div>
         )}
         <div className={clsx("text-black space-y-2 overflow-y-auto", product.image ? "md:w-1/2" : "w-full")}>
+        <p className="text-black cursor-pointer font-semibold transition-opacity hover:opacity-50 focus-visible:opacity-50 py-4" onClick={onClose}>&larr; Back to all products</p>
           <h3 className="text-lg font-semibold">{product.year}</h3>
           <h2 className="text-2xl font-bold">{product.title}</h2>
           <p className="text-sm">{product.description}</p>
@@ -116,12 +82,6 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
               <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
                 <Spinner className="h-4 w-4" />
                 Searching eBay...
-              </div>
-            )}
-            {!shouldFetchEbay && (
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <Spinner className="h-4 w-4" />
-                Loading...
               </div>
             )}
             {!loading && ebayLinks.length > 0 && !error && (
@@ -162,7 +122,7 @@ export function ProductModal({ product, onClose }: ProductModalProps) {
           </div>
         </div>
       </div>
-      {preview && typeof window !== 'undefined' &&
+      {preview &&
         createPortal(
           <Image
             src={preview.src}

@@ -14,12 +14,7 @@ export function useEbayListings(query: string | null) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if (!query) {
-      setLinks([]);
-      setLoading(false);
-      setError(false);
-      return;
-    }
+    if (!query) return;
     let cancelled = false;
     const fetchListings = async () => {
       try {

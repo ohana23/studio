@@ -9,11 +9,9 @@
 'use client'
 
 import { products } from "@/lib/products";
-import { getSlugByProduct } from "@/lib/slugs";
 import Image from "next/image";
-import { Fragment, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { SearchFilter } from "@/components/SearchFilter";
+import { Fragment, useState } from "react";
+import { ProductModal } from "@/components/ProductModal";
 
 interface Product {
   year: string;
@@ -22,24 +20,13 @@ interface Product {
   image?: string;
 }
 export default function Home() {
-  const router = useRouter();
-  const [filteredProducts, setFilteredProducts] = useState(products);
-  
-  // Preload modal chunks to prevent loading errors on iOS
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Preload the modal route chunk by prefetching a product route
-      // This ensures the modal chunk is loaded before it's needed
-      router.prefetch('/product/iphone-1st-generation'); // Use a real slug that exists
-    }
-  }, [router]);
-  
+  const [openProduct, setOpenProduct] = useState<Product | null>(null);
   const featuredProductTitles = [
     "iPhone (1st generation)",
     "iPod Mini (1st gen)",
+    "iMac G3",
     "Power Mac G5",
     "Power Mac G4 Cube",
-    "iMac G3",
     "Twentieth Anniversary Macintosh",
   ];
   const featuredProducts = featuredProductTitles
@@ -54,14 +41,12 @@ export default function Home() {
         <section className="mb-16">
           <h2 className="text-2xl font-semibold text-center mb-4">Featured Vintage Products</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-            {featuredProducts.map((product, index) => {
-              const slug = getSlugByProduct(product);
-              return (
-                <div
-                  key={product.title}
-                  onClick={() => slug && router.push(`/product/${slug}`)}
-                  className="cursor-pointer text-center transition-colors hover:bg-accent p-2"
-                >
+            {featuredProducts.map((product, index) => (
+              <div
+                key={product.title}
+                onClick={() => setOpenProduct(product)}
+                className="cursor-pointer text-center transition-colors hover:bg-accent p-2"
+              >
                 {product.image && (
                   <Image
                     src={product.image}
@@ -72,22 +57,16 @@ export default function Home() {
                     className="mx-auto h-32 w-32 object-contain"
                   />
                 )}
-                  <h3 className="mt-4 font-semibold">{product.title}</h3>
-                  <p className="text-sm text-muted-foreground">{product.year}</p>
-                </div>
-              );
-            })}
+                <h3 className="mt-4 font-semibold">{product.title}</h3>
+                <p className="text-sm text-muted-foreground">{product.year}</p>
+              </div>
+            ))}
           </div>
         </section>
         <h2 className="text-2xl font-semibold text-center mb-4">All Products</h2>
-        
-        {/* Search and Filter Component */}
-        <SearchFilter products={products} onFilteredProducts={setFilteredProducts} />
-        
         <div className="border-t border-border">
-          {filteredProducts.map((product, index) => {
-            const showYearHeader = index === 0 || product.year !== filteredProducts[index - 1].year;
-            const slug = getSlugByProduct(product);
+          {products.map((product, index) => {
+            const showYearHeader = index === 0 || product.year !== products[index - 1].year;
             return (
               <Fragment key={index}>
                 {showYearHeader && (
@@ -96,7 +75,7 @@ export default function Home() {
                   </div>
                 )}
                 <div
-                  onClick={() => slug && router.push(`/product/${slug}`)}
+                  onClick={() => setOpenProduct(product)}
                   className="group transition-colors duration-200 ease-in-out hover:bg-accent border-b border-border cursor-pointer"
                 >
                   <div className="p-6">
@@ -131,6 +110,12 @@ export default function Home() {
           Products on this website use eBay affiliate links. If you purchase an item through one of these links, I receive a small payment around 2-4%. It's how I pay some of the monthly hosting costs associated with this site.
         </div>
       </div>
+        {openProduct && (
+          <ProductModal
+            product={openProduct}
+            onClose={() => setOpenProduct(null)}
+          />
+        )}
     </main>
   );
 }
