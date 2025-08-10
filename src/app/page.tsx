@@ -11,7 +11,7 @@
 import { products } from "@/lib/products";
 import { getSlugByProduct } from "@/lib/slugs";
 import Image from "next/image";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { SearchFilter } from "@/components/SearchFilter";
 
@@ -24,6 +24,15 @@ interface Product {
 export default function Home() {
   const router = useRouter();
   const [filteredProducts, setFilteredProducts] = useState(products);
+  
+  // Preload modal chunks to prevent loading errors on iOS
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Preload the modal route chunk by prefetching a product route
+      // This ensures the modal chunk is loaded before it's needed
+      router.prefetch('/product/iphone-1st-generation'); // Use a real slug that exists
+    }
+  }, [router]);
   
   const featuredProductTitles = [
     "iPhone (1st generation)",
