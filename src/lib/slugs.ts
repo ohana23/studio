@@ -23,6 +23,3 @@ export function getAllProductIndices(): string[] {
   return products.map((_, index) => index.toString());
 }
 
-// Legacy function names for easier migration (can be removed later)
-export const getProductBySlug = getProductByIndex;
-export const getSlugByProduct = getIndexByProduct;

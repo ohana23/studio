@@ -3,7 +3,7 @@
 import { use } from 'react';
 import { useRouter } from 'next/navigation';
 import { notFound } from 'next/navigation';
-import { getProductBySlug } from '@/lib/slugs';
+import { getProductByIndex } from '@/lib/slugs';
 import { ProductModal } from '@/components/ProductModal';
 
 interface InterceptedProductPageProps {
@@ -15,7 +15,7 @@ interface InterceptedProductPageProps {
 export default function InterceptedProductPage({ params }: InterceptedProductPageProps) {
   const router = useRouter();
   const { slug } = use(params);
-  const product = getProductBySlug(slug);
+  const product = getProductByIndex(slug);
 
   if (!product) {
     notFound();
